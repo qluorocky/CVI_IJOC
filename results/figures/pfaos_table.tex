@@ -1,0 +1,28 @@
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{PFAOS versus projected OE, varying dimension. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts constraint-gradient calls for the proposed method, or generic projections for OE; dashes indicate no target crossing.}
+\label{tab:pfaos_numerical}
+\begin{tabular}{r l r r r r r}
+\hline
+$n$ & Method & Reached & Time (s) & $F$ calls & FO/proj & Final $\mathcal E$ \\
+\hline
+25 & PFAOS & 10/10 & 0.0879 & 2,742 & 122 & 0.00016 \\
+25 & Projected OE & 10/10 & 0.163 & 28 & 27 & 0.000706 \\
+\hline
+50 & PFAOS & 10/10 & 0.0726 & 2,203 & 123 & 0.000197 \\
+50 & Projected OE & 10/10 & 0.185 & 28 & 27 & 0.000685 \\
+\hline
+100 & PFAOS & 10/10 & 0.0853 & 2,404 & 123 & 0.000145 \\
+100 & Projected OE & 10/10 & 0.208 & 28 & 27 & 0.000883 \\
+\hline
+200 & PFAOS & 10/10 & 0.081 & 2,096 & 123 & 0.000107 \\
+200 & Projected OE & 10/10 & 0.285 & 28 & 27 & 0.00101 \\
+\hline
+500 & PFAOS & 10/10 & 0.0901 & 2,184 & 123 & 0.000168 \\
+500 & Projected OE & 10/10 & 0.564 & 28 & 27 & 0.00238 \\
+\hline
+1000 & PFAOS & 10/10 & 0.102 & 2,039 & 124 & 0.000175 \\
+1000 & Projected OE & 10/10 & 1.03 & 28 & 27 & 0.00442 \\
+\hline
+\end{tabular}
+\end{table}

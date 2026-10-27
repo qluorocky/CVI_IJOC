@@ -1,0 +1,19 @@
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{MC-PFAOS versus projected OE, varying dimension at $m=5$. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing.}
+\label{tab:mc_dimension_numerical}
+\begin{tabular}{r l r r r r r r}
+\hline
+$n$ & Method & Reached & Time (s) & $F$ calls & FO/proj & $mN_J$ & Final $\mathcal E$ \\
+\hline
+25 & MC-PFAOS & 10/10 & 0.971 & 35,140 & 523 & 2,615 & 0.00393 \\
+25 & Projected OE & 10/10 & 0.107 & 19 & 18 & -- & 0.000228 \\
+\hline
+50 & MC-PFAOS & 10/10 & 1.15 & 38,737 & 419 & 2,095 & 0.00363 \\
+50 & Projected OE & 10/10 & 0.129 & 19 & 18 & -- & 0.000265 \\
+\hline
+100 & MC-PFAOS & 10/10 & 0.889 & 29,508 & 523 & 2,615 & 0.00354 \\
+100 & Projected OE & 10/10 & 0.149 & 19 & 18 & -- & 0.0004 \\
+\hline
+\end{tabular}
+\end{table}

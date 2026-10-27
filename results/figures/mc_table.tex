@@ -1,0 +1,34 @@
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{MC-PFAOS versus projected OE, varying the number of constraints. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing.}
+\label{tab:mc_pfaos_numerical}
+\begin{tabular}{r l r r r r r r}
+\hline
+$m$ & Method & Reached & Time (s) & $F$ calls & FO/proj & $mN_J$ & Final $\mathcal E$ \\
+\hline
+2 & MC-PFAOS & 10/10 & 0.625 & 21,086 & 419 & 838 & 0.00315 \\
+2 & Projected OE & 10/10 & 0.175 & 28 & 27 & -- & 0.000704 \\
+\hline
+5 & MC-PFAOS & 10/10 & 1.15 & 38,737 & 419 & 2,095 & 0.00363 \\
+5 & Projected OE & 10/10 & 0.129 & 19 & 18 & -- & 0.000265 \\
+\hline
+10 & MC-PFAOS & 10/10 & 1.14 & 38,545 & 419 & 4,190 & 0.00404 \\
+10 & Projected OE & 10/10 & 0.128 & 19 & 18 & -- & 0.000267 \\
+\hline
+20 & MC-PFAOS & 10/10 & 1.26 & 38,545 & 419 & 8,380 & 0.00402 \\
+20 & Projected OE & 10/10 & 0.144 & 19 & 18 & -- & 0.000303 \\
+\hline
+40 & MC-PFAOS & 10/10 & 1.2 & 38,305 & 419 & 16,760 & 0.00416 \\
+40 & Projected OE & 10/10 & 0.181 & 19 & 18 & -- & 0.000392 \\
+\hline
+100 & MC-PFAOS & 10/10 & 1.2 & 38,545 & 419 & 41,900 & 0.00401 \\
+100 & Projected OE & 10/10 & 1.89 & 19 & 18 & -- & 0.00719 \\
+\hline
+250 & MC-PFAOS & 10/10 & 1.33 & 38,545 & 419 & 104,750 & 0.00465 \\
+250 & Projected OE & 9/10 & 2.49 & 19 & 18 & -- & 0.0115 \\
+\hline
+500 & MC-PFAOS & 10/10 & 1.58 & 38,545 & 419 & 209,500 & 0.00541 \\
+500 & Projected OE & 0/10 & -- & -- & -- & -- & 0.14 \\
+\hline
+\end{tabular}
+\end{table}

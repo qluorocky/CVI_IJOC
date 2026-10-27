@@ -1,0 +1,38 @@
+name: Reproducibility checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q
+      - name: Regenerate tables and figures from released checkpoints
+        run: >-
+          python plot_results.py
+          --pfaos results/pfaos/checkpoints.csv
+          --mc results/mc/checkpoints.csv
+          --output results/ci_figures --target 0.02
+      - name: Check released tables against regenerated tables
+        run: |
+          diff -u results/figures/pfaos_table.tex results/ci_figures/pfaos_table.tex
+          diff -u results/figures/mc_table.tex results/ci_figures/mc_table.tex
+          diff -u results/figures/mc_dimension_table.tex results/ci_figures/mc_dimension_table.tex

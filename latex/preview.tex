@@ -1,0 +1,15 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage[hidelinks]{hyperref}
+\newcounter{algorithm}
+\setcounter{topnumber}{3}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\textfraction}{0.08}
+\raggedbottom
+\begin{document}
+% Standalone references to Algorithms 1 and 2 in the full manuscript.
+\refstepcounter{algorithm}\label{alg:pfaos}
+\refstepcounter{algorithm}\label{alg:mc-pfaos}
+\input{latex/sec_numerical_experiments.tex}
+\end{document}
