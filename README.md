@@ -92,6 +92,15 @@ The target is `max(weak VI gap, ||[G(x_bar)]_+||_2) <= 0.02`, evaluated at
 saved averaged iterates after all timed runs finish. Time to target is
 the first **saved** checkpoint satisfying both criteria. Unsuccessful runs
 are censored; reported target-time medians use successful runs only.
+Tables give the success count out of ten for each configuration. Times are
+wall-clock seconds without normalization; normalization applies to the generated
+instances. Each OE configuration is reported separately, with no trajectory
+selection or fallback rule.
+
+Weak gaps are numerical estimates from a separate convex solve. The reported
+primal objective and an `optimal` status do not supply a certified upper bound
+on the true gap; target attainment is therefore numerical, not independently
+certified. See the primal/dual bound explanation in `REPRODUCIBILITY.md`.
 
 The reported OE baseline is `cvx_benchmark.py`. Its three starting operator
 estimates are `M0 = M`, `0.1*M`, and `10*M`, where `M = ||B||_2` is the

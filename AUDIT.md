@@ -45,6 +45,13 @@
   solver runs and only `optimal` results count as target crossings. On an
   independently solved 12-dimensional check, CVXPY/Clarabel and SciPy/SLSQP
   gap values differed by `8.49e-9`, and SLSQP feasibility was `1.43e-11`.
+- Agreement between two numerical solvers is a cross-check, not an upper-gap
+  certificate. `WeakGap.evaluate` uses the primal minimization objective. Even
+  when feasible, that value gives a lower gap bound after reversing signs.
+  A certified upper gap bound requires a verified lower bound on the minimum,
+  for example from a dual-feasible point with numerical errors accounted for.
+  No such bound was saved in the released data. All target counts refer to
+  numerical estimates; `optimal` status alone is not independent certification.
 - The CVXPY projection is accepted only when the solver reports `optimal`
   and an independent NumPy evaluation confirms ball and constraint
   feasibility within `2e-6`. A projection that consumes the remaining time
@@ -93,6 +100,10 @@
 - Dimensions up to 1000 and constraint counts up to 500 are tested on
   separate axes. No experiment combines `n=1000` with `m=500`. The study is
   synthetic and reports medians and interquartile bands over ten seeds.
+- Table times are unnormalized wall-clock seconds. Instance normalization is
+  specified separately. Target-time/work medians use only the successful
+  seeds shown in each row; final residual medians use all ten. All three OE
+  configurations have their own rows, with no best-OE selection or fallback.
 
 ## GitHub-ready release
 

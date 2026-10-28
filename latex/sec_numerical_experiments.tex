@@ -333,6 +333,25 @@ experiments returned an optimal status. A separate small-instance check
 against a constrained optimization implementation agreed to approximately
 $8.5\times10^{-9}$.
 
+These evaluations are numerical estimates, not independently certified
+upper bounds. To distinguish the two, let $p^\star$ be the minimum in
+\eqref{eq:numerical_gap_program} and set $c=-d^\top\bar x$. A feasible
+primal objective $p$ satisfies $p\geq p^\star$, hence
+\[
+ [c-p]_+\leq\operatorname{Gap}(\bar x).
+\]
+Thus, a feasible objective from the gap maximization is a lower bound.
+A verified dual-feasible lower bound $\ell\leq p^\star$ would instead give
+\[
+ \operatorname{Gap}(\bar x)\leq[c-\ell]_+,
+\]
+which is the direction needed to certify a threshold. Solver status and
+requested tolerances alone do not provide this verification. The released
+data save primal-objective gap estimates, without dual bounds or checkpoint
+decision vectors. Accordingly, all reported gaps, combined residuals,
+and target crossings below refer to numerical estimates; the small-instance
+agreement is a numerical cross-check.
+
 \paragraph{Checkpoints, work counts, and aggregation.}
 We evaluate the initial point, the final accepted average, and averages
 at geometrically spaced outer iterations. Starting at $k_1=1$, the
@@ -360,7 +379,10 @@ different costs.
 
 The tables give the number of successful seeds and the median time and
 work to target among successful runs. Final combined residuals are medians over
-all ten seeds, including unsuccessful runs. The figures show the weak VI
+all ten seeds, including unsuccessful runs. All times are wall-clock seconds,
+without normalization; normalization applies to the instances. Each of the
+three OE initializations is reported separately, so no trajectory selection
+or fallback rule is used. The figures show the numerically estimated weak VI
 gap and constraint violation separately; the combined residual $\mathcal E$
 is used for target attainment and the final-accuracy column in the tables.
 Wall-clock time is the only
@@ -439,8 +461,8 @@ constraint at every iterate.
 \subsubsection{MC-PFAOS versus projected OE.}
 We first fix $n=50$ and vary the number of coupling constraints.
 Table~\ref{tab:mc_pfaos_numerical} reports the complete constraint grid.
-The accompanying figures show $m=100$, a setting at which both methods
-reach the target in every seed. Each figure includes an early view and
+The accompanying figures show $m=100$, where MC-PFAOS and OE initialized
+at $M$ reach the numerical target in every seed. Each figure includes an early view and
 a view of the full three-second run. The early windows cover the first
 $0.02$ seconds for the weak gap and the first $0.12$ seconds for
 constraint violation. In the table, ``FO/proj'' counts full Jacobian

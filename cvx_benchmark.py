@@ -67,6 +67,7 @@ class WeakGap:
         )
 
     def evaluate(self, x):
+        """Numerical primal-objective gap estimate, not a certified upper bound."""
         self.linear.value = np.asarray(self.problem.M.T @ x + self.problem.d).reshape(-1)
         # Diagnostic postprocessing is outside the timed OE and proposed runs.
         if not _solve(self.model, warm_start=True) or self.y.value is None:

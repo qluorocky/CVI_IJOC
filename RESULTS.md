@@ -16,6 +16,11 @@ settings, target, and budgets remain as before.
 Times below are medians at the first saved target checkpoint among successful
 runs. A dash indicates no target crossing; final residuals use all ten seeds.
 Offline weak-gap evaluation is excluded from algorithm timing.
+Times are wall-clock seconds without normalization; only the instances are
+normalized. `Reached` gives the number of numerical target crossings out of
+ten. The weak gaps are primal-objective estimates, not certified upper bounds;
+the counts and times therefore describe numerical attainment. Each OE
+configuration is reported separately, without a selection or fallback rule.
 
 ## Single-constraint study
 

@@ -53,16 +53,15 @@ def tex_table(summary, settings, output, multi, target, axis=None):
     title = ("MC-PFAOS versus projected OE, varying dimension at $m=5$" if multi and unit == "n" else
              "MC-PFAOS versus projected OE, varying the number of constraints" if multi else
              "PFAOS versus projected OE, varying dimension")
-    caption = (rf"\caption{{{title}. Ten seeds per setting; target $\varepsilon={target:g}$. "
-               "Time and work are medians over successful runs; final residuals use all seeds. "
-               "FO/proj counts full Jacobian calls" if multi else
-               rf"\caption{{{title}. Ten seeds per setting; target $\varepsilon={target:g}$. "
-               "Time and work are medians over successful runs; final residuals use all seeds. "
-               "FO/proj counts constraint-gradient calls")
+    caption = (rf"\caption{{{title}. Ten seeds per setting; numerical target $\varepsilon={target:g}$. "
+               "Times are wall-clock seconds, without normalization; normalization applies to the instances. "
+               "Reached gives successful seeds/10. Time and work are medians over those seeds; "
+               "final residuals use all ten. Gap estimates use numerical primal objectives, not certified upper bounds. ")
+    caption += "FO/proj counts " + ("full Jacobian calls" if multi else "constraint-gradient calls")
     caption += (" and $mN_J$ counts individual component-gradient equivalents" if multi else "")
     caption += " for the proposed method, or generic projections for OE; dashes indicate no target crossing. "
     caption += (r"OE labels specify the starting estimate $\widehat M_0\in\{M,0.1M,10M\}$; "
-                r"the operator line search is retained.}")
+                r"the operator line search is retained. All three are reported separately; no best-OE selection is used.}")
     lines = [r"\begin{table}[!htbp]", r"\centering\scriptsize",
              caption,
              rf"\label{{{label}}}",
@@ -138,7 +137,7 @@ def _plot_metric(ax, data, proposed, metric, target, xmax=3.0):
         # feasible solution; an ordinary log scale cannot represent zero.
         ax.set_yscale("symlog", linthresh=1e-4)
         ax.set_ylim(bottom=0)
-        ax.set_ylabel(r"Weak VI gap $\mathrm{Gap}(\bar x)$")
+        ax.set_ylabel("Estimated weak VI gap")
     else:
         ax.set_ylabel(r"Constraint violation $\|[G(\bar x)]_+\|_2$")
         ax.set_ylim(bottom=0)

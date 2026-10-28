@@ -1,6 +1,6 @@
 \begin{table}[!htbp]
 \centering\scriptsize
-\caption{MC-PFAOS versus projected OE, varying dimension at $m=5$. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing. OE labels specify the starting estimate $\widehat M_0\in\{M,0.1M,10M\}$; the operator line search is retained.}
+\caption{MC-PFAOS versus projected OE, varying dimension at $m=5$. Ten seeds per setting; numerical target $\varepsilon=0.02$. Times are wall-clock seconds, without normalization; normalization applies to the instances. Reached gives successful seeds/10. Time and work are medians over those seeds; final residuals use all ten. Gap estimates use numerical primal objectives, not certified upper bounds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing. OE labels specify the starting estimate $\widehat M_0\in\{M,0.1M,10M\}$; the operator line search is retained. All three are reported separately; no best-OE selection is used.}
 \label{tab:mc_dimension_numerical}
 \begin{tabular}{r l r r r r r r}
 \hline
