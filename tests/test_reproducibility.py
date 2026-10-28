@@ -8,6 +8,7 @@ import pandas as pd
 import pytest
 
 from experiment_common import write_config
+from cvx_benchmark import OE_SETTINGS
 from plot_results import summarize
 
 
@@ -24,12 +25,19 @@ def test_released_checkpoints_and_summaries_are_consistent():
         raw = pd.read_csv(ROOT / "results" / study / "checkpoints.csv")
         proposed = "PFAOS" if study == "pfaos" else "MC-PFAOS"
         expected = {(n, m, method, seed) for n, m in settings
-                    for method in [proposed, "Projected OE"] for seed in range(10)}
+                    for method in [proposed] + [name for _, name in OE_SETTINGS]
+                    for seed in range(10)}
         assert set(raw.groupby(["n", "m", "method", "seed"]).groups) == expected
         assert not raw.duplicated(["n", "m", "method", "seed", "k"]).any()
         assert raw.gap_status.eq("optimal").all()
         assert np.isfinite(raw[["gap", "violation", "residual", "elapsed"]]).all().all()
         np.testing.assert_allclose(raw.residual, np.maximum(raw.gap, raw.violation))
+        for factor, method in OE_SETTINGS:
+            oe = raw[raw.method == method]
+            np.testing.assert_allclose(oe.M0, factor * oe.M_true)
+            assert oe.M0_factor.eq(factor).all()
+            if factor >= 1:
+                np.testing.assert_array_equal(oe.projection_calls, oe.k)
         for _, run in raw.groupby(["n", "m", "method", "seed"]):
             run = run.sort_values("k")
             assert run.k.iloc[0] == 0

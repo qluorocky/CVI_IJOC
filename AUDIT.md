@@ -20,10 +20,10 @@
   and the generic Clarabel conic solver. Model construction, canonicalization,
   rejected projections, and the solver are all on OE's clock. The fresh solves
   use no warm start or parameterized compilation cache.
-- To isolate this correction, `rerun_generic_oe.py` retains the prior
-  PFAOS/MC-PFAOS rows and remeasures only OE on exactly the same seeds and
-  generated instances. The unchanged proposed implementations can also be
-  rerun end to end with the main drivers.
+- `rerun_generic_oe.py` can retain prior PFAOS/MC-PFAOS rows and remeasure
+  the three OE initializations on the same seeds and generated instances.
+  The present operator-estimate study uses the main drivers to remeasure
+  all methods end to end.
 - The four local curvature pairs are generated exactly once per proposed
   method and seed. Their four gradient/Jacobian queries and elapsed time are
   included in the proposed method's figures and tables. Rejected search
@@ -55,8 +55,8 @@
   projector was substituted to alter the ordering.
 - The legacy source regression suite and the added monotonicity,
   linearization, weak-gap, generic-projection, and chart-alignment checks
-  pass; the GitHub-ready release adds checks for raw-data consistency and
-  protection of existing output directories (nine tests total).
+  pass; release checks cover raw-data consistency, protection of existing output
+  directories, and the three OE starting estimates (ten tests total).
 - A fresh replay of seed 0 at `n=50,m=100` reproduced both saved weak gaps
   and constraint-violation norms at checkpoints 0, 8, 12, and 27 to numerical
   precision. The observed rebound is in the *combined* target diagnostic
@@ -96,8 +96,9 @@
 
 ## GitHub-ready release
 
-- The scientific recursions, normalized generator, reported OE implementation,
-  and raw checkpoint CSVs are unchanged from the reference code archive.
+- The scientific recursions, normalized generator, and projection solver are
+  retained from the reference code archive. The present raw checkpoint CSVs
+  come from a full rerun with three OE starting operator estimates.
 - Driver defaults now use the full reported grids and three-second budget,
   and write to separate reproduction directories. Existing experiment output
   is rejected before its configuration or checkpoint CSV can be modified.
@@ -107,3 +108,20 @@
   in the later manuscript archive are not mixed into the release.
 - GitHub Actions runs tests and regenerates figures and tables from the raw
   checkpoints; it compares the regenerated LaTeX tables with tracked copies.
+
+## OE starting operator estimates
+
+- The only OE algorithm input varied is `M0`: `M`, `0.1*M`, and `10*M`,
+  where `M` is the numerical spectral norm of the realized affine operator
+  matrix. A deterministic sparse singular-value computation is excluded
+  from solver timing and cross-checked against a dense SVD on a small case.
+- OE's original operator line search is retained. It can increase a low
+  estimate and does not decrease a high estimate. Constraints remain inside
+  the same generic projection, with no constraint-smoothness input or search.
+- All proposed-method and OE trajectories are remeasured on the same 160
+  paired instances. Each CSV records `M_true`, `M0`, and `M0_factor`; the
+  latter two fields are blank for the proposed methods. A release check
+  confirms that the valid global starting bounds `M` and `10*M` accept
+  every completed iteration without operator backtracking.
+- The existing single-constraint time axes now cover the full three-second
+  budget so late target crossings and failures from `10*M` remain visible.

@@ -66,7 +66,7 @@ L_F=\|B\|_2\le1.4,\qquad \|d\|_2=1.
 \]
 These bounds keep the operator scale comparable across dimensions. The
 sparse representation also allows an evaluation of $F$ in $O(n)$ work,
-without storing a dense $n\times n$ matrix. The algorithms are not given
+without storing a dense $n\times n$ matrix. PFAOS and MC-PFAOS are not given
 $L_F$ or its construction-based bound.
 
 \paragraph{Shared resource constraints.}
@@ -197,7 +197,16 @@ is distinct from the solution-accuracy target defined below.
 
 \paragraph{Projected operator extrapolation.}
 The benchmark applies OE to the original feasible set $\widetilde X$.
-Set $x_{-1}=x_0=x^{\mathrm f}$ and $\widehat M_0=1$. At iteration
+Set $x_{-1}=x_0=x^{\mathrm f}$. For each realized instance, let
+$M=\|B\|_2$ and run OE with the three initial operator estimates
+\[
+\widehat M_0\in\{M,\ 0.1M,\ 10M\}.
+\]
+The spectral norm is computed to numerical precision before the timed runs.
+These initializations isolate sensitivity to the operator estimate; neither
+$L$ nor $L_G$ is an OE input because the nonlinear constraints are handled
+by projection. The following operator line search is retained in all three
+configurations. At iteration
 $k\ge1$, trial $q\ge0$ is defined by
 \begin{equation}\label{eq:numerical_projected_oe}
 \begin{aligned}
@@ -229,8 +238,9 @@ accepted step minimizes
 +\widehat M_k\|x-x_{k-1}\|_2^2
 \quad\text{over }x\in\widetilde X.
 \]
-The benchmark adapts its operator estimate from values of $F$ and receives
-none of the global smoothness constants.
+After initialization, the benchmark adapts its operator estimate from values
+of $F$. The true operator norm is used only to define this controlled comparison
+and is not supplied to either proposed method.
 
 \paragraph{Generic nonlinear projection.}
 For a trial center $z$, projected OE computes
@@ -259,8 +269,11 @@ at each trial.
 \label{subsec:numerical_protocol}
 
 \paragraph{Instance grids and computational environment.}
-The single-constraint experiment uses
-$n\in\{25,50,100,200,500,1000\}$ and $m=1$. The main multi-constraint
+The single-constraint experiment uses $m=1$ and dimensions
+\[
+n\in\{25,50,100,200,500,1000\}.
+\]
+The main multi-constraint
 experiment fixes $n=50$ and varies
 $m\in\{2,5,10,20,40,100,250,500\}$. We also examine dimension scaling
 for MC-PFAOS at $m=5$ and $n\in\{25,50,100\}$. These two scaling
@@ -314,7 +327,7 @@ Sy=0$, we have
 \bigl\{y^\top Hy-(B^\top\bar x+d)^\top y\bigr\}\right]_+.
 \end{equation}
 The minimization is convex because $H\succeq0$. We evaluate it after
-both timed runs using a separate CVXPY/Clarabel model with the same
+all timed runs using a separate CVXPY/\allowbreak Clarabel model with the same
 $10^{-7}$ solver tolerances. All saved gap evaluations in the reported
 experiments returned an optimal status. A separate small-instance check
 against a constrained optimization implementation agreed to approximately
@@ -365,15 +378,14 @@ drivers, configuration files, and raw checkpoint data.
 \subsection{Numerical results}\label{subsec:numerical_results}
 
 The released data contain 60 paired single-constraint instances and
-100 paired multi-constraint instances. All 4,634 saved weak-gap evaluations
+100 paired multi-constraint instances. All 8,890 saved weak-gap evaluations
 returned an optimal status. The figures, tables, and numerical summaries
 below are obtained from the accompanying checkpoint CSV files.
 
 \subsubsection{PFAOS versus projected OE.}
 Table~\ref{tab:pfaos_numerical} reports the single-constraint results
 for all six dimensions. The weak-gap figure presents the same six
-settings over a common interval of $0$--$1.2$ seconds, which contains
-every observed target crossing. The separate feasibility figure uses
+settings over the full three-second budget for all three OE initializations. The separate feasibility figure uses
 the same time interval. In both figures, the dashed horizontal line
 marks $\varepsilon=0.02$. The table's ``FO/proj'' column reports
 constraint-gradient evaluations for PFAOS and generic nonlinear
@@ -383,37 +395,45 @@ accepted average under the full three-second budget.
 \input{latex/pfaos_figures.tex}
 \input{results/figures/pfaos_table.tex}
 
-Both methods reach the target in all ten seeds at every dimension.
-PFAOS has the lower median time to target throughout the grid, with
-medians ranging from $0.073$ to $0.102$ seconds. For OE, the median
-increases from $0.163$ seconds at $n=25$ to $1.026$ seconds at $n=1000$.
-At $n=200$, the respective medians are $0.081$ and $0.285$ seconds;
-at $n=500$, they are $0.090$ and $0.564$ seconds. Thus the timing
-difference becomes more pronounced as the dimension increases, while
-PFAOS's target time changes comparatively little over the tested range.
+PFAOS and OE initialized at either $M$ or $0.1M$ reach the target in
+all ten seeds at every dimension. PFAOS has the lower median target time
+throughout the grid, with medians between $0.079$ and $0.108$ seconds.
+For OE initialized at $M$, the median increases from $0.181$ seconds at
+$n=25$ to $1.131$ seconds at $n=1000$. At the latter dimension, OE
+initialized at $0.1M$ requires a median of $0.884$ seconds, compared with
+$0.108$ seconds for PFAOS. Thus a lower starting estimate can improve OE's
+observed target time even after accounting for rejected line-search trials.
+The acceptance test uses directional differences of $F$, so the global norm
+$M$ need not give the fastest locally accepted steps.
 
-The evaluation counts help explain this behavior. At $n=1000$, PFAOS
-requires a median of $2039$ evaluations of $F$ and approximately $124$
-constraint-gradient evaluations by the target checkpoint. OE requires
-only $28$ evaluations of $F$, but also performs $27$ generic nonlinear
-projections. At this dimension, the median fraction of OE's time to
-target spent in the projection routine is $99.8\%$. This routine
-includes model construction, canonicalization, the conic solve, and
-the independent feasibility check. For these sparse operators, PFAOS's
-additional operator evaluations are inexpensive enough that its simple
-primal subproblems yield a substantial reduction in wall time. The
-comparison illustrates the computational tradeoff underlying operator
-sliding: a larger number of operator evaluations can be worthwhile when
-constraint-related computations dominate the cost of the alternative.
+The evaluation counts clarify this comparison. At $n=1000$, PFAOS uses
+a median of $2039$ evaluations of $F$ and approximately $124$
+constraint-gradient evaluations by the target checkpoint. OE initialized
+at $M$ uses $28$ evaluations of $F$ and $27$ generic nonlinear projections;
+starting at $0.1M$ gives $22$ evaluations of $F$ and $21$ projections,
+including rejected trials. PFAOS performs substantially more operator work,
+but its sparse evaluations and simple primal subproblems are sufficiently
+inexpensive to yield the lower wall time. This illustrates the computational
+tradeoff motivating operator sliding when full nonlinear projections are
+costly.
 
-The equal-budget comparison leads to the same ordering at the largest
-dimension. At $n=1000$, the median final residual is
-$1.75\times10^{-4}$ for PFAOS and $4.42\times10^{-3}$ for OE.
-Both methods have zero measured coupling-constraint violation at every
-saved checkpoint in the single-constraint study. Consequently, their
-combined residuals coincide with their weak gaps on these instances.
-This observed feasibility of the reported averages does not imply that
-PFAOS's affine constraint models enforce the original quadratic
+The large overestimate has a more pronounced effect. At $n=25$, OE
+initialized at $10M$ requires a median of $315$ projections and $2.169$
+seconds to reach the target, compared with $27$ projections and $0.181$
+seconds when initialized at $M$. The $10M$ configuration succeeds in all
+ten seeds through $n=100$, in only three seeds at $n=200$, and in none
+at $n=500$ or $1000$. Its conditional median at $n=200$ is $2.991$
+seconds among the three successful runs. The operator line search only
+increases its estimate, so it can correct an underestimate but does not
+reduce an initially valid, conservative value such as $10M$.
+
+At $n=1000$, the median final combined residuals under the common budget
+are $1.89\times10^{-4}$ for PFAOS and $4.56\times10^{-3}$,
+$3.48\times10^{-3}$, and $0.113$ for OE initialized at $M$, $0.1M$,
+and $10M$, respectively. All saved single-constraint averages have zero
+measured coupling-constraint violation in every configuration, so their
+combined residuals coincide with their weak gaps. This observed feasibility
+does not imply that PFAOS's affine models enforce the original quadratic
 constraint at every iterate.
 
 \subsubsection{MC-PFAOS versus projected OE.}
@@ -431,48 +451,57 @@ for MC-PFAOS.
 \input{latex/mc_figures.tex}
 \input{results/figures/mc_table.tex}
 
-OE has the lower median time to target for every setting through
-$m=40$. At $m=5$, its median is $0.129$ seconds, compared with
-$1.146$ seconds for MC-PFAOS; at $m=40$, the respective medians are
-$0.181$ and $1.199$ seconds. Both methods succeed in all ten seeds
-throughout this range. The ordering reverses at $m=100$, where
-MC-PFAOS requires a median of $1.198$ seconds and OE requires
-$1.890$ seconds, again with ten successful seeds for each method.
+With $\widehat M_0=M$ or $0.1M$, OE has the lower median target time
+for every setting through $m=40$, and both configurations succeed in all
+ten seeds. At $m=5$, the respective OE medians are $0.115$ and $0.182$
+seconds, compared with $1.241$ seconds for MC-PFAOS. At $m=40$, they are
+$0.166$ and $0.262$ seconds, compared with $1.209$ seconds for MC-PFAOS.
+OE initialized at $10M$ also succeeds in every seed throughout this range,
+but requires median times of $1.518$ and $1.931$ seconds at $m=5$ and
+$40$. Its conservative operator estimate therefore changes the timing
+comparison even when the projections involve relatively few constraints.
 
-At larger constraint counts, the success fractions also distinguish
-the methods. For $m=250$, MC-PFAOS reaches the target in all ten seeds,
-with a median time of $1.326$ seconds. OE succeeds in nine seeds,
-with a median of $2.492$ seconds among those nine runs. For $m=500$,
-MC-PFAOS again succeeds in all ten seeds, with a median time of
-$1.577$ seconds, whereas OE has no observed target crossing within
-the budget. The median final residuals across all ten seeds at this
-setting are $5.41\times10^{-3}$ and $0.140$, respectively.
+At $m=100$, MC-PFAOS reaches the target in all ten seeds with a median
+time of $1.156$ seconds. OE initialized at $M$ also succeeds in all ten,
+with a median of $1.742$ seconds. Starting at $0.1M$ gives eight successful
+runs and a conditional median of $2.364$ seconds, whereas starting at
+$10M$ gives no observed target crossing. At $m=250$, MC-PFAOS succeeds
+in all ten seeds at a median of $1.314$ seconds. The corresponding success
+fractions for OE are $9/10$, $5/10$, and $0/10$ for starting estimates
+$M$, $0.1M$, and $10M$. The conditional medians for the two configurations
+with successful runs are $2.140$ and $2.881$ seconds, respectively.
 
-These changes are primarily associated with the cost of the generic
-projection. From $m=5$ through $m=250$, OE's median number of projections
-to target remains $18$ among successful runs, even as its median target
-time increases substantially. MC-PFAOS performs much more operator
-work: at $m=500$, it requires a median of $38{,}545$ evaluations of
-$F$ and $419$ full Jacobian evaluations, corresponding to $209{,}500$
-component-gradient equivalents. Its median target time nevertheless
-grows relatively moderately because the primal and dual updates retain
-simple projections.
+For $m=500$, MC-PFAOS again succeeds in all ten seeds, with a median
+target time of $1.577$ seconds. None of the three OE configurations reaches
+the target within the budget. The median final combined residual is
+$5.76\times10^{-3}$ for MC-PFAOS, compared with $0.138$, $0.256$, and
+$0.182$ for OE initialized at $M$, $0.1M$, and $10M$, respectively.
+MC-PFAOS uses a median of $38{,}545$ operator evaluations and $419$
+full Jacobian evaluations by the target checkpoint, corresponding to
+$209{,}500$ component-gradient equivalents.
 
-The construction helps separate this projection cost from changes in
-the scale of the underlying problem. The median initial weak gap is
-$0.261$ at $m=5$ and $0.256$ at $m=500$, consistent with the intended
-comparability of the generated games. The constraints at larger $m$
-are, however, partly redundant members of five resource families.
-The observed crossover consequently describes this family and the
-specified implementation, which constructs a new generic model for
-every projection; its location may differ for other constraint
-geometries or projection implementations.
+The same generic nonlinear projection is used in all three OE configurations.
+The differences among them therefore arise from their initial operator
+estimates and the resulting accepted steps and rejected trials. In
+particular, correcting an underestimate requires additional full projections,
+which can consume a substantial part of the budget when $m$ is large.
+A large overestimate avoids these rejected trials but yields smaller steps,
+and the line search does not reduce it. MC-PFAOS performs much more operator
+work, while retaining simple primal and dual projections.
+
+The constraint construction controls the scale of the problem as $m$
+increases. The median initial weak gap is $0.261$ at $m=5$ and $0.256$
+at $m=500$. The larger constraint sets nevertheless contain partly redundant
+members of five resource families. The observed timing comparisons describe
+this synthetic family and the specified fresh generic projection policy;
+other constraint geometries or projection implementations can give different
+results.
 
 Table~\ref{tab:mc_dimension_numerical} reports the additional
-dimension study at $m=5$. Both methods reach the target in all ten
+dimension study at $m=5$. All four configurations reach the target in all ten
 seeds for each dimension. For $n\in\{25,50,100\}$, OE's median target
-times are $0.107$, $0.129$, and $0.149$ seconds, compared with
-$0.971$, $1.146$, and $0.889$ seconds for MC-PFAOS. Thus increasing
+times with $\widehat M_0=M$ are $0.115$, $0.115$, and $0.189$ seconds,
+compared with $1.085$, $1.241$, and $0.945$ seconds for MC-PFAOS. Thus increasing
 the dimension over this range, while retaining only five coupling
 constraints, does not reverse OE's timing advantage.
 

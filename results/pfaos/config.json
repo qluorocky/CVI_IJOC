@@ -4,5 +4,11 @@
   "seconds": 3.0,
   "target": 0.02,
   "iterations": 10000,
-  "out": "results/pfaos_final"
+  "out": "results/reproduction_pfaos_M",
+  "oe_M0_factors": [
+    1.0,
+    0.1,
+    10.0
+  ],
+  "oe_M_definition": "spectral norm of realized operator matrix"
 }

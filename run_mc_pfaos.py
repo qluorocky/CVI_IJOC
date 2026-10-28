@@ -27,10 +27,10 @@ def main():
             rows = run_pair(make_game(seed, n, m), seed, args.seconds,
                             args.target, args.iterations)
             append_rows(args.out / "checkpoints.csv", rows)
-            first_end = [row for row in rows if row["method"] == "MC-PFAOS"][-1]
+            final = {row["method"]: row["residual"] for row in rows}
             print(f"MC-PFAOS n={n} m={m} seed={seed} "
-                  f"end residuals={first_end['residual']:.3g},"
-                  f"{rows[-1]['residual']:.3g}", flush=True)
+                  + ", ".join(f"{name}={value:.3g}" for name, value in final.items()),
+                  flush=True)
 
 
 if __name__ == "__main__":

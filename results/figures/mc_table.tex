@@ -1,34 +1,50 @@
 \begin{table}[!htbp]
 \centering\scriptsize
-\caption{MC-PFAOS versus projected OE, varying the number of constraints. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing.}
+\caption{MC-PFAOS versus projected OE, varying the number of constraints. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing. OE labels specify the starting estimate $\widehat M_0\in\{M,0.1M,10M\}$; the operator line search is retained.}
 \label{tab:mc_pfaos_numerical}
 \begin{tabular}{r l r r r r r r}
 \hline
 $m$ & Method & Reached & Time (s) & $F$ calls & FO/proj & $mN_J$ & Final $\mathcal E$ \\
 \hline
-2 & MC-PFAOS & 10/10 & 0.625 & 21,086 & 419 & 838 & 0.00315 \\
-2 & Projected OE & 10/10 & 0.175 & 28 & 27 & -- & 0.000704 \\
+2 & MC-PFAOS & 10/10 & 0.633 & 21,086 & 419 & 838 & 0.00323 \\
+2 & Projected OE (M) & 10/10 & 0.202 & 28 & 27 & -- & 0.000761 \\
+2 & Projected OE (0.1M) & 10/10 & 0.296 & 39 & 38 & -- & 0.00101 \\
+2 & Projected OE (10M) & 10/10 & 2.42 & 316 & 315 & -- & 0.0104 \\
 \hline
-5 & MC-PFAOS & 10/10 & 1.15 & 38,737 & 419 & 2,095 & 0.00363 \\
-5 & Projected OE & 10/10 & 0.129 & 19 & 18 & -- & 0.000265 \\
+5 & MC-PFAOS & 10/10 & 1.24 & 38,737 & 419 & 2,095 & 0.00405 \\
+5 & Projected OE (M) & 10/10 & 0.115 & 16 & 15 & -- & 0.000293 \\
+5 & Projected OE (0.1M) & 10/10 & 0.182 & 23 & 22 & -- & 0.000393 \\
+5 & Projected OE (10M) & 10/10 & 1.52 & 176 & 175 & -- & 0.00516 \\
 \hline
-10 & MC-PFAOS & 10/10 & 1.14 & 38,545 & 419 & 4,190 & 0.00404 \\
-10 & Projected OE & 10/10 & 0.128 & 19 & 18 & -- & 0.000267 \\
+10 & MC-PFAOS & 10/10 & 1.19 & 38,545 & 419 & 4,190 & 0.00404 \\
+10 & Projected OE (M) & 10/10 & 0.136 & 16 & 15 & -- & 0.000289 \\
+10 & Projected OE (0.1M) & 10/10 & 0.17 & 23 & 22 & -- & 0.000358 \\
+10 & Projected OE (10M) & 10/10 & 1.52 & 176 & 175 & -- & 0.00594 \\
 \hline
-20 & MC-PFAOS & 10/10 & 1.26 & 38,545 & 419 & 8,380 & 0.00402 \\
-20 & Projected OE & 10/10 & 0.144 & 19 & 18 & -- & 0.000303 \\
+20 & MC-PFAOS & 10/10 & 1.18 & 38,545 & 419 & 8,380 & 0.00449 \\
+20 & Projected OE (M) & 10/10 & 0.149 & 16 & 15 & -- & 0.000317 \\
+20 & Projected OE (0.1M) & 10/10 & 0.22 & 23 & 22 & -- & 0.000464 \\
+20 & Projected OE (10M) & 10/10 & 1.62 & 176 & 175 & -- & 0.00633 \\
 \hline
-40 & MC-PFAOS & 10/10 & 1.2 & 38,305 & 419 & 16,760 & 0.00416 \\
-40 & Projected OE & 10/10 & 0.181 & 19 & 18 & -- & 0.000392 \\
+40 & MC-PFAOS & 10/10 & 1.21 & 38,305 & 419 & 16,760 & 0.0042 \\
+40 & Projected OE (M) & 10/10 & 0.166 & 16 & 15 & -- & 0.000383 \\
+40 & Projected OE (0.1M) & 10/10 & 0.262 & 23 & 22 & -- & 0.000536 \\
+40 & Projected OE (10M) & 10/10 & 1.93 & 176 & 175 & -- & 0.00801 \\
 \hline
-100 & MC-PFAOS & 10/10 & 1.2 & 38,545 & 419 & 41,900 & 0.00401 \\
-100 & Projected OE & 10/10 & 1.89 & 19 & 18 & -- & 0.00719 \\
+100 & MC-PFAOS & 10/10 & 1.16 & 38,545 & 419 & 41,900 & 0.00437 \\
+100 & Projected OE (M) & 10/10 & 1.74 & 16 & 15 & -- & 0.00811 \\
+100 & Projected OE (0.1M) & 8/10 & 2.36 & 23 & 22 & -- & 0.0126 \\
+100 & Projected OE (10M) & 0/10 & -- & -- & -- & -- & 0.125 \\
 \hline
-250 & MC-PFAOS & 10/10 & 1.33 & 38,545 & 419 & 104,750 & 0.00465 \\
-250 & Projected OE & 9/10 & 2.49 & 19 & 18 & -- & 0.0115 \\
+250 & MC-PFAOS & 10/10 & 1.31 & 38,545 & 419 & 104,750 & 0.00514 \\
+250 & Projected OE (M) & 9/10 & 2.14 & 13 & 12 & -- & 0.0118 \\
+250 & Projected OE (0.1M) & 5/10 & 2.88 & 20 & 19 & -- & 0.02 \\
+250 & Projected OE (10M) & 0/10 & -- & -- & -- & -- & 0.135 \\
 \hline
-500 & MC-PFAOS & 10/10 & 1.58 & 38,545 & 419 & 209,500 & 0.00541 \\
-500 & Projected OE & 0/10 & -- & -- & -- & -- & 0.14 \\
+500 & MC-PFAOS & 10/10 & 1.58 & 38,545 & 419 & 209,500 & 0.00576 \\
+500 & Projected OE (M) & 0/10 & -- & -- & -- & -- & 0.138 \\
+500 & Projected OE (0.1M) & 0/10 & -- & -- & -- & -- & 0.256 \\
+500 & Projected OE (10M) & 0/10 & -- & -- & -- & -- & 0.182 \\
 \hline
 \end{tabular}
 \end{table}

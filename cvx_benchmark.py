@@ -4,9 +4,19 @@ from time import perf_counter
 
 import cvxpy as cp
 import numpy as np
+from scipy.sparse.linalg import svds
 
 
 SOLVER_TOL = 1e-7
+OE_SETTINGS = ((1.0, "Projected OE (M)"),
+               (0.1, "Projected OE (0.1M)"),
+               (10.0, "Projected OE (10M)"))
+
+
+def operator_lipschitz(problem):
+    """Numerical spectral norm of the realized operator, outside solver timing."""
+    return float(svds(problem.M, k=1, which="LM", tol=1e-12,
+                      v0=np.ones(problem.n), return_singular_vectors=False)[0])
 
 
 def _constraints(problem, variable):
@@ -65,8 +75,10 @@ class WeakGap:
         return max(raw, 0.0), str(self.model.status)
 
 
-def projected_oe(problem, seconds, max_iterations=10000):
+def projected_oe(problem, seconds, max_iterations=10000, M0=1.0):
     """Original adaptive OE recursion; full nonlinear projection is generic CVX."""
+    if not np.isfinite(M0) or M0 <= 0:
+        raise ValueError("M0 must be finite and positive.")
     start = perf_counter()
     deadline = start + seconds
     projection = GenericProjection(problem)
@@ -75,7 +87,7 @@ def projected_oe(problem, seconds, max_iterations=10000):
     f_prev = problem.F(x_prev)
     f_prev2 = f_prev.copy()
     avg = x_prev.copy()
-    M_prev = 1.0
+    M_prev = float(M0)
     F_calls = 1
     projection_calls = 0
     projection_time = 0.0
@@ -123,5 +135,6 @@ def projected_oe(problem, seconds, max_iterations=10000):
     else:
         status = "Iteration cap"
     return dict(history=history, status=status, runtime=perf_counter()-start,
+                initial_M=float(M0), final_M=M_prev,
                 F_calls=F_calls, projection_calls=projection_calls,
                 projection_time=projection_time)

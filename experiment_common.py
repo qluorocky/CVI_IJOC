@@ -7,7 +7,7 @@ from time import perf_counter
 
 import numpy as np
 
-from cvx_benchmark import WeakGap, projected_oe
+from cvx_benchmark import OE_SETTINGS, WeakGap, operator_lipschitz, projected_oe
 from initialization import (estimate_initial_constraint_curvature,
                             estimate_initial_vector_constraint_curvature)
 from mc_pfaos import MCPFAOSOptions, mc_pfaos
@@ -62,14 +62,17 @@ def _proposed(problem, seconds, multi, seed, max_iterations):
 def run_pair(problem, seed, seconds, target, max_iterations=10000):
     multi = problem.m > 1
     proposed_name = "MC-PFAOS" if multi else "PFAOS"
+    M_true = operator_lipschitz(problem)
     points, proposed_status, gradient_label, L0, max_multiplier = _proposed(
         problem, seconds, multi, seed, max_iterations)
-    oe = projected_oe(problem, seconds, max_iterations)
-    oe_points = [oe["history"][i] for i in _checkpoints(len(oe["history"])-1)]
+    runs = [(proposed_name, points, proposed_status, None)]
+    for factor, name in OE_SETTINGS:
+        oe = projected_oe(problem, seconds, max_iterations, M0=factor*M_true)
+        oe_points = [oe["history"][i] for i in _checkpoints(len(oe["history"])-1)]
+        runs.append((name, oe_points, oe["status"], factor))
     gap = WeakGap(problem)
     rows = []
-    for name, samples, status in ((proposed_name, points, proposed_status),
-                                  ("Projected OE", oe_points, oe["status"])):
+    for name, samples, status, factor in runs:
         for sample in samples:
             begin = perf_counter()
             value, gap_status = gap.evaluate(sample["x"])
@@ -87,7 +90,9 @@ def run_pair(problem, seed, seconds, target, max_iterations=10000):
                              solver_status=status, target=target,
                              L0=L0 if name == proposed_name else "",
                              multiplier_max=max_multiplier if name == proposed_name else "",
-                             gradient_label=gradient_label))
+                             gradient_label=gradient_label,
+                             M_true=M_true, M0=factor*M_true if factor else "",
+                             M0_factor=factor if factor else ""))
     return rows
 
 
@@ -109,4 +114,6 @@ def write_config(path, args):
         )
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x") as file:
-        file.write(json.dumps(vars(args), indent=2, default=str) + "\n")
+        file.write(json.dumps(dict(vars(args), oe_M0_factors=[s[0] for s in OE_SETTINGS],
+                                   oe_M_definition="spectral norm of realized operator matrix"),
+                              indent=2, default=str) + "\n")

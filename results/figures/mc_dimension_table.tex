@@ -1,19 +1,25 @@
 \begin{table}[!htbp]
 \centering\scriptsize
-\caption{MC-PFAOS versus projected OE, varying dimension at $m=5$. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing.}
+\caption{MC-PFAOS versus projected OE, varying dimension at $m=5$. Ten seeds per setting; target $\varepsilon=0.02$. Time and work are medians over successful runs; final residuals use all seeds. FO/proj counts full Jacobian calls and $mN_J$ counts individual component-gradient equivalents for the proposed method, or generic projections for OE; dashes indicate no target crossing. OE labels specify the starting estimate $\widehat M_0\in\{M,0.1M,10M\}$; the operator line search is retained.}
 \label{tab:mc_dimension_numerical}
 \begin{tabular}{r l r r r r r r}
 \hline
 $n$ & Method & Reached & Time (s) & $F$ calls & FO/proj & $mN_J$ & Final $\mathcal E$ \\
 \hline
-25 & MC-PFAOS & 10/10 & 0.971 & 35,140 & 523 & 2,615 & 0.00393 \\
-25 & Projected OE & 10/10 & 0.107 & 19 & 18 & -- & 0.000228 \\
+25 & MC-PFAOS & 10/10 & 1.09 & 35,140 & 523 & 2,615 & 0.00425 \\
+25 & Projected OE (M) & 10/10 & 0.115 & 16 & 15 & -- & 0.00025 \\
+25 & Projected OE (0.1M) & 10/10 & 0.208 & 32 & 31 & -- & 0.000461 \\
+25 & Projected OE (10M) & 10/10 & 1.03 & 141 & 140 & -- & 0.00389 \\
 \hline
-50 & MC-PFAOS & 10/10 & 1.15 & 38,737 & 419 & 2,095 & 0.00363 \\
-50 & Projected OE & 10/10 & 0.129 & 19 & 18 & -- & 0.000265 \\
+50 & MC-PFAOS & 10/10 & 1.24 & 38,737 & 419 & 2,095 & 0.00405 \\
+50 & Projected OE (M) & 10/10 & 0.115 & 16 & 15 & -- & 0.000293 \\
+50 & Projected OE (0.1M) & 10/10 & 0.182 & 23 & 22 & -- & 0.000393 \\
+50 & Projected OE (10M) & 10/10 & 1.52 & 176 & 175 & -- & 0.00516 \\
 \hline
-100 & MC-PFAOS & 10/10 & 0.889 & 29,508 & 523 & 2,615 & 0.00354 \\
-100 & Projected OE & 10/10 & 0.149 & 19 & 18 & -- & 0.0004 \\
+100 & MC-PFAOS & 10/10 & 0.945 & 29,508 & 523 & 2,615 & 0.00373 \\
+100 & Projected OE (M) & 10/10 & 0.189 & 19 & 18 & -- & 0.000548 \\
+100 & Projected OE (0.1M) & 10/10 & 0.242 & 22 & 21 & -- & 0.000655 \\
+100 & Projected OE (10M) & 10/10 & 2.05 & 211 & 210 & -- & 0.00934 \\
 \hline
 \end{tabular}
 \end{table}

@@ -10,7 +10,7 @@ quadratic coupling constraints.
 
 The repository includes the experiment drivers, pinned Python dependencies,
 160 paired synthetic instances represented by seeds and generator code,
-4,634 saved diagnostic checkpoints, Python plotting code, and LaTeX figures,
+8,890 saved diagnostic checkpoints, Python plotting code, and LaTeX figures,
 tables, and experiment description. All instance data are generated locally;
 no external dataset or commercial solver is required.
 
@@ -79,7 +79,8 @@ There are 60 paired single-constraint instances and 100 paired
 multi-constraint instances. Each method has a three-second algorithm budget
 per instance. Offline weak-gap evaluation adds time, especially at `m=500`,
 and is excluded from the reported algorithm times. The full run therefore
-takes longer than the 16 minutes of nominal algorithm budgets. Measured
+takes longer than the 32 minutes of nominal algorithm budgets for one proposed
+method and three OE initializations on each instance. Measured
 times and the last completed iterate can vary across machines.
 
 The dimension and constraint-count studies are separate: the release tests
@@ -88,11 +89,16 @@ The dimension and constraint-count studies are separate: the release tests
 ## What is measured
 
 The target is `max(weak VI gap, ||[G(x_bar)]_+||_2) <= 0.02`, evaluated at
-saved averaged iterates after both timed methods finish. Time to target is
+saved averaged iterates after all timed runs finish. Time to target is
 the first **saved** checkpoint satisfying both criteria. Unsuccessful runs
 are censored; reported target-time medians use successful runs only.
 
-The reported OE baseline is `cvx_benchmark.py`. Every projection trial builds
+The reported OE baseline is `cvx_benchmark.py`. Its three starting operator
+estimates are `M0 = M`, `0.1*M`, and `10*M`, where `M = ||B||_2` is the
+spectral norm of the realized affine operator matrix. The norm is computed
+outside solver timing. OE retains its operator line search; no constraint
+smoothness estimate is needed because the original constraints are handled
+by projection. PFAOS and MC-PFAOS receive no global constants. Every projection trial builds
 a fresh CVXPY model and uses Clarabel with `1e-7` tolerances, without warm
 starts or a parameterized compilation cache. All model and projection work
 is timed. `projected_oe.py` retains the earlier Dykstra implementation for

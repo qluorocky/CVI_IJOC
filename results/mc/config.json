@@ -1,1 +1,17 @@
-{"n_by_m": {"2":50,"5":[25,50,100],"10":50,"20":50,"40":50,"100":50,"250":50,"500":50}, "seeds":10, "seconds":3, "target":0.02, "iterations":10000, "blas_threads":1}
+{
+  "m": "2,5,10,20,40,100,250,500",
+  "fixed_n": 50,
+  "n": "25,50,100",
+  "fixed_m": 5,
+  "seeds": 10,
+  "seconds": 3.0,
+  "target": 0.02,
+  "iterations": 10000,
+  "out": "results/reproduction_mc_M",
+  "oe_M0_factors": [
+    1.0,
+    0.1,
+    10.0
+  ],
+  "oe_M_definition": "spectral norm of realized operator matrix"
+}

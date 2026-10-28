@@ -2,7 +2,8 @@
 
 import numpy as np
 
-from cvx_benchmark import GenericProjection, WeakGap, projected_oe
+from cvx_benchmark import (OE_SETTINGS, GenericProjection, WeakGap,
+                           operator_lipschitz, projected_oe)
 from game_problem import make_game
 
 
@@ -32,3 +33,20 @@ def test_game_and_generic_benchmark():
     assert np.max(p.G(oe["history"][-1]["x"])) <= 2e-6
     assert oe["history"][-1]["F_calls"] >= len(oe["history"])
     assert oe["projection_calls"] >= len(oe["history"]) - 1
+
+
+def test_oe_initial_operator_estimates():
+    p = make_game(3, 12, 5)
+    M = operator_lipschitz(p)
+    np.testing.assert_allclose(M, np.linalg.norm(p.M.toarray(), 2), rtol=1e-10)
+    for factor, _ in OE_SETTINGS:
+        run = projected_oe(p, 2., max_iterations=1, M0=factor*M)
+        assert len(run["history"]) == 2
+        assert run["initial_M"] == factor*M
+        if factor >= 1:
+            # A valid global bound must accept the first trial.
+            assert run["projection_calls"] == 1
+            assert run["final_M"] == factor*M
+        else:
+            assert run["projection_calls"] > 1
+            assert run["final_M"] > factor*M

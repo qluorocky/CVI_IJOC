@@ -1,4 +1,4 @@
-"""Rerun projected OE after changing its solver, retaining valid proposed runs.
+"""Rerun the three OE initializations, retaining valid proposed runs.
 
 Use this when the OE benchmark changes but PFAOS/MC-PFAOS and the generated
 instances do not. Full independent reruns remain available through the two
@@ -13,7 +13,7 @@ from time import perf_counter
 
 import numpy as np
 
-from cvx_benchmark import WeakGap, projected_oe
+from cvx_benchmark import OE_SETTINGS, WeakGap, operator_lipschitz, projected_oe
 from experiment_common import _checkpoints, append_rows
 from game_problem import make_game
 
@@ -38,8 +38,11 @@ def main():
     completed = set()
     if args.output.exists():
         with args.output.open(newline="") as f:
-            completed = {(int(r["n"]), int(r["m"]), int(r["seed"]))
-                         for r in csv.DictReader(f) if r["method"] == "Projected OE"}
+            methods = defaultdict(set)
+            for r in csv.DictReader(f):
+                methods[(int(r["n"]), int(r["m"]), int(r["seed"]))].add(r["method"])
+            completed = {key for key, names in methods.items()
+                         if {name for _, name in OE_SETTINGS} <= names}
     for key, proposed_rows in sorted(groups.items()):
         if key in completed:
             continue
@@ -47,29 +50,31 @@ def main():
         if len([r for r in proposed_rows if int(r["k"]) == 0]) != 1:
             raise ValueError(f"Missing or duplicate initial checkpoint: {key}")
         problem = make_game(seed, n, m)
-        oe = projected_oe(problem, args.seconds)
+        M_true = operator_lipschitz(problem)
+        runs = [(factor, name, projected_oe(problem, args.seconds, M0=factor*M_true))
+                for factor, name in OE_SETTINGS]
         diagnostic = WeakGap(problem)
-        rows = [dict(row) for row in proposed_rows]
+        rows = [dict(row, M_true=M_true, M0="", M0_factor="") for row in proposed_rows]
         template = proposed_rows[0]
-        for i in _checkpoints(len(oe["history"]) - 1):
-            sample = oe["history"][i]
-            clock = perf_counter()
-            gap, gap_status = diagnostic.evaluate(sample["x"])
-            violation = float(np.linalg.norm(np.maximum(problem.G(sample["x"]), 0.)))
-            rows.append(dict(template, method="Projected OE", k=sample["k"],
-                             elapsed=round(sample["elapsed"], 9),
-                             F_calls=sample["F_calls"], grad_calls=0,
-                             projection_calls=sample["projection_calls"],
-                             projection_time=sample["projection_time"],
-                             gap=gap, violation=violation,
-                             residual=max(gap, violation),
-                             gap_status=gap_status,
-                             diagnostic_seconds=perf_counter()-clock,
-                             solver_status=oe["status"], L0="", multiplier_max=""))
+        for factor, name, oe in runs:
+            for i in _checkpoints(len(oe["history"]) - 1):
+                sample = oe["history"][i]
+                clock = perf_counter()
+                gap, gap_status = diagnostic.evaluate(sample["x"])
+                violation = float(np.linalg.norm(np.maximum(problem.G(sample["x"]), 0.)))
+                rows.append(dict(template, method=name, k=sample["k"],
+                                 elapsed=round(sample["elapsed"], 9),
+                                 F_calls=sample["F_calls"], grad_calls=0,
+                                 projection_calls=sample["projection_calls"],
+                                 projection_time=sample["projection_time"],
+                                 gap=gap, violation=violation,
+                                 residual=max(gap, violation),
+                                 gap_status=gap_status,
+                                 diagnostic_seconds=perf_counter()-clock,
+                                 solver_status=oe["status"], L0="", multiplier_max="",
+                                 M_true=M_true, M0=factor*M_true, M0_factor=factor))
         append_rows(args.output, rows)
-        print(f"n={n} m={m} seed={seed}: OE {len(oe['history'])-1} iter, "
-              f"{oe['projection_calls']} generic solves, "
-              f"gap={rows[-1]['gap']:.4g}, status={oe['status']}", flush=True)
+        print(f"n={n} m={m} seed={seed}: completed all three OE initializations", flush=True)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from cvx_benchmark import OE_SETTINGS
+
 
 def summarize(raw):
     records = []
@@ -58,7 +60,9 @@ def tex_table(summary, settings, output, multi, target, axis=None):
                "Time and work are medians over successful runs; final residuals use all seeds. "
                "FO/proj counts constraint-gradient calls")
     caption += (" and $mN_J$ counts individual component-gradient equivalents" if multi else "")
-    caption += " for the proposed method, or generic projections for OE; dashes indicate no target crossing.}"
+    caption += " for the proposed method, or generic projections for OE; dashes indicate no target crossing. "
+    caption += (r"OE labels specify the starting estimate $\widehat M_0\in\{M,0.1M,10M\}$; "
+                r"the operator line search is retained.}")
     lines = [r"\begin{table}[!htbp]", r"\centering\scriptsize",
              caption,
              rf"\label{{{label}}}",
@@ -67,7 +71,7 @@ def tex_table(summary, settings, output, multi, target, axis=None):
              + (r"$mN_J$ & " if multi else "") + r"Final $\mathcal E$ \\",
              r"\hline"]
     for setting in settings:
-        for name in [method, "Projected OE"]:
+        for name in [method] + [name for _, name in OE_SETTINGS]:
             sub = summary[(summary[unit] == setting) & (summary.method == name)]
             assert len(sub) > 0, (setting, name)
             hit = sub[sub.reached]
@@ -118,9 +122,13 @@ def _time_axis(ax, xmax=3.0):
 def _plot_metric(ax, data, proposed, metric, target, xmax=3.0):
     shown = data[(data.k > 0) & (data.elapsed <= xmax)].elapsed.to_numpy()
     times = np.unique(np.r_[0, shown, xmax])
-    for method, color in [(proposed, "#1767a0"), ("Projected OE", "#c05621")]:
+    methods = [(proposed, "#1767a0", "-", proposed)]
+    methods += [(name, "#c05621", style,
+                 r"OE: $M_0=M$" if factor == 1 else rf"OE: $M_0={factor:g}M$")
+                for (factor, name), style in zip(OE_SETTINGS, ("-", "--", ":"))]
+    for method, color, style, label in methods:
         low, middle, high = time_profile(data[data.method == method], times, metric)
-        ax.step(times, middle, where="post", lw=1.8, color=color, label=method)
+        ax.step(times, middle, where="post", lw=1.8, color=color, ls=style, label=label)
         ax.fill_between(times, low, high, step="post", color=color, alpha=0.13)
     ax.scatter([0], [data[data.k == 0][metric].median()], s=16, c="#333333", zorder=5)
     ax.axhline(target, ls="--", lw=1, color="#777777")
@@ -154,31 +162,30 @@ def _save(fig, output):
 def figures(single, multi, output, target):
     plt.rcParams.update({"font.size": 10, "axes.spines.top": False,
                          "axes.spines.right": False, "pdf.fonttype": 42})
-    # Every target crossing in the n grid occurs by 1.2 seconds. The six
-    # panels share the same linear time axis so target times align directly.
+    # Show the complete budget for all three OE initial operator estimates.
     chosen_n = [25, 50, 100, 200, 500, 1000]
     fig, axes = plt.subplots(2, 3, figsize=(10.2, 5.7), sharex=True, sharey=True,
                              constrained_layout=True)
     for ax, n in zip(axes.flat, chosen_n):
         data = single[single.n == n]
-        _plot_metric(ax, data, "PFAOS", "gap", target, xmax=1.2)
+        _plot_metric(ax, data, "PFAOS", "gap", target, xmax=3.0)
         ax.set_title(rf"$n={n}$")
     for ax in axes[0]:
         ax.set_xlabel("")
     for ax in axes[:, 1:].flat:
         ax.set_ylabel("")
-    axes[0, 0].legend(frameon=False, fontsize=9, loc="upper right")
+    axes[0, 0].legend(frameon=False, fontsize=8, loc="lower left")
     _save(fig, output / "pfaos_residual")
 
     fig, ax = plt.subplots(figsize=(6.6, 2.65), constrained_layout=True)
     # All six dimensions and both methods have zero violation in the raw data.
     if (single.violation == 0).all():
-        ax.plot([0, 1.2], [0, 0], lw=2, color="#303f51")
+        ax.plot([0, 3], [0, 0], lw=2, color="#303f51")
         ax.scatter([0], [0], s=17, c="#303f51", zorder=5)
-        ax.text(0.48, 0.76, "PFAOS and projected OE: zero at every saved checkpoint\nfor all six dimensions",
+        ax.text(0.48, 0.76, "PFAOS and all three OE initializations: zero at every saved checkpoint\nfor all six dimensions",
                 transform=ax.transAxes, ha="center", va="center", fontsize=9)
         ax.axhline(target, ls="--", lw=1, color="#777777")
-        _time_axis(ax, xmax=1.2)
+        _time_axis(ax, xmax=3.0)
         ax.set_ylim(0, target * 1.6)
         ax.set_ylabel(r"Constraint violation $\|[G(\bar x)]_+\|_2$")
     else:
