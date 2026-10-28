@@ -27,3 +27,15 @@ def test_wall_clock_axis_is_linear_seconds():
     assert ax.get_xscale() == "linear"
     np.testing.assert_allclose(ax.get_xticks(), np.arange(0, 3.5, .5))
     plt.close(fig)
+
+
+def test_bootstrap_intervals_resample_seeds_and_preserve_the_median():
+    checkpoints = pd.DataFrame([
+        (0, 0, 0., .6), (0, 1, .1, .8),
+        (1, 0, 0., .6), (1, 1, .2, .2),
+    ], columns=["seed", "k", "elapsed", "residual"])
+    times = np.array([0., .1, .2])
+    profile = time_profile(checkpoints, times, "residual", bootstrap_samples=2000)
+    np.testing.assert_allclose(profile, [[.6, .6, .2], [.6, .7, .5], [.6, .8, .8]])
+    np.testing.assert_array_equal(
+        profile, time_profile(checkpoints, times, "residual", bootstrap_samples=2000))

@@ -87,8 +87,8 @@ def tex_table(summary, settings, output, multi, target, axis=None):
     Path(output).write_text("\n".join(lines) + "\n")
 
 
-def time_profile(data, times, metric):
-    """Median/IQR of the latest *saved* checkpoint available at each time."""
+def time_profile(data, times, metric, bootstrap_samples=0):
+    """Latest saved values: median/IQR, or pointwise bootstrap median intervals."""
     paths = []
     for _, run in data.groupby("seed"):
         run = run.sort_values("k")
@@ -101,6 +101,13 @@ def time_profile(data, times, metric):
         paths.append(run[metric].to_numpy()[index])
     paths = np.stack(paths)
     assert np.isfinite(paths).all()
+    if bootstrap_samples:
+        # Resample whole seed trajectories, preserving dependence across time.
+        rng = np.random.default_rng(20261028)
+        indices = rng.integers(len(paths), size=(bootstrap_samples, len(paths)))
+        medians = np.median(paths[indices], axis=1)
+        low, high = np.percentile(medians, [2.5, 97.5], axis=0)
+        return np.stack([low, np.median(paths, axis=0), high])
     return np.percentile(paths, [25, 50, 75], axis=0)
 
 
@@ -156,6 +163,73 @@ def _save(fig, output):
         os.fsync(file.fileno())
     fig.savefig(out.with_suffix(".png"), dpi=240)
     plt.close(fig)
+
+
+def summary_figures(single, multi, output, target):
+    """Two-panel summaries with four curves and pointwise 95% median intervals."""
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+
+    panels = [(single[(single.n == 1000) & (single.m == 1)], "PFAOS",
+               r"(a) PFAOS: $n=1000$, $m=1$"),
+              (multi[(multi.n == 50) & (multi.m == 100)], "MC-PFAOS",
+               r"(b) MC-PFAOS: $n=50$, $m=100$")]
+    styles = [("#161616", "-"), ("#414141", "--"),
+              ("#737373", "-."), ("#999999", ":")]
+    labels = ["PFAOS / MC-PFAOS"] + [
+        r"OE: $\widehat M_0=M$" if factor == 1 else
+        rf"OE: $\widehat M_0={factor:g}M$" for factor, _ in OE_SETTINGS]
+    with plt.rc_context({"font.family": "STIXGeneral", "mathtext.fontset": "stix",
+                         "font.size": 11, "axes.spines.top": False,
+                         "axes.spines.right": False, "pdf.fonttype": 42}):
+        for metric in ("gap", "residual"):
+            fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.7), sharey=True)
+            fig.subplots_adjust(left=.08, right=.985, bottom=.29, top=.90, wspace=.16)
+            for ax, (data, proposed, title) in zip(axes, panels):
+                shown = data[(data.k > 0) & data.elapsed.between(1e-4, 3)].elapsed
+                times = np.unique(np.r_[np.geomspace(1e-4, 3, 241), shown])
+                methods = [proposed] + [name for _, name in OE_SETTINGS]
+                for method, (color, style) in zip(methods, styles):
+                    runs = data[data.method == method]
+                    assert runs.seed.nunique() == 10, (title, method)
+                    assert (runs.gap_status == "optimal").all()
+                    low, middle, high = time_profile(runs, times, metric, bootstrap_samples=2000)
+                    ax.step(times, middle, where="post", color=color, ls=style, lw=1.8)
+                    ax.fill_between(times, low, high, step="post", color=color, alpha=.10)
+                ax.axhline(target, ls=(0, (5, 4)), color="#606060", lw=.9)
+                ax.set_xscale("log")
+                ax.set_xlim(1e-4, 3)
+                ax.set_xticks([1e-4, 1e-3, 1e-2, .1, 1, 3],
+                              [r"$10^{-4}$", r"$10^{-3}$", r"$10^{-2}$",
+                               r"$10^{-1}$", r"$10^{0}$", "3"])
+                ax.set_xlabel("Wall-clock time (s)")
+                ax.set_title(title, fontsize=12, pad=9)
+                ax.grid(which="major", color="#dddddd", linewidth=.55)
+                ax.set_axisbelow(True)
+                if metric == "gap":
+                    ax.set_yscale("symlog", linthresh=1e-4, linscale=.65)
+                    ax.set_ylim(0, 1)
+                    ax.set_yticks([0, 1e-4, 1e-3, 1e-2, .1, 1],
+                                  ["0", r"$10^{-4}$", r"$10^{-3}$", r"$10^{-2}$",
+                                   r"$10^{-1}$", r"$10^{0}$"])
+                else:
+                    ax.set_yscale("log")
+                    ax.set_ylim(1e-4, 1)
+            axes[0].set_ylabel(r"Estimated weak VI gap $\widehat{\mathrm{Gap}}(\bar x)$"
+                               if metric == "gap" else r"Combined error $\widehat{\mathcal{E}}(\bar x)$")
+            handles = [Line2D([], [], color=color, ls=style, lw=1.8, label=label)
+                       for (color, style), label in zip(styles, labels)]
+            handles += [Line2D([], [], color="#606060", ls=(0, (5, 4)), lw=.9,
+                               label=rf"Target $\varepsilon={target:g}$"),
+                        Patch(facecolor="#777777", alpha=.15,
+                              label="95% bootstrap CI (10 seeds)")]
+            fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.5, .018),
+                       ncol=3, frameon=False, fontsize=10.5, handlelength=3)
+            note = (r"Gap axis is linear below $10^{-4}$ to include zero; feasibility is evaluated separately."
+                    if metric == "gap" else
+                    r"$\widehat{\mathcal{E}}(\bar x)=\max\{\widehat{\mathrm{Gap}}(\bar x),\ \|[G(\bar x)]_+\|_2\}$")
+            fig.text(.53, .173, note, ha="center", fontsize=10)
+            _save(fig, output / f"summary_{metric}")
 
 
 def figures(single, multi, output, target):
@@ -232,6 +306,7 @@ def main():
         for suffix in (".pdf", ".png"):
             (args.output / f"{old}{suffix}").unlink(missing_ok=True)
     figures(single, multi, args.output, args.target)
+    summary_figures(single, multi, args.output, args.target)
     print("Written figures, summaries, and LaTeX tables to", args.output)
 
 

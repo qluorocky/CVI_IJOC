@@ -55,9 +55,19 @@ python plot_results.py \
   --output results/reproduction_figures --target 0.02
 ```
 
-The command generates four PDF/PNG figures, three LaTeX tables, and two
+The command generates six PDF/PNG figures, three LaTeX tables, and two
 per-seed summary CSVs. The plotting layout expects the full supplied grids,
 including `n=50, m=100` for the MC-PFAOS convergence plots.
+
+The two-panel summaries compare PFAOS at `n=1000, m=1` and MC-PFAOS at
+`n=50, m=100`, with just three OE initializations (`M`, `0.1M`, `10M`).
+They show medians and pointwise 95% bootstrap confidence bands over ten seeds:
+[weak gap](results/figures/summary_gap.pdf) and
+[combined error](results/figures/summary_residual.pdf). The latter includes
+feasibility, which a zero weak gap alone does not establish. Both use
+logarithmic time axes; the gap axis includes a linear region below `1e-4`
+to display zero. Copy-ready figure captions are in
+[`latex/summary_figures.tex`](latex/summary_figures.tex).
 
 ## Rerun all experiments
 
@@ -134,8 +144,9 @@ results; and [AUDIT.md](AUDIT.md) for implementation checks and limitations.
 | `tests/` | Algorithm, projection, plotting, and release-integrity checks |
 
 The raw CSV files are the source of the repository's reported numbers.
-Figures show median weak gaps and violations separately, with interquartile
-bands. Larger constraint sets reuse five resource families with small
+The detailed figures show median weak gaps and violations separately, with
+interquartile bands; the two-panel summaries use bootstrap confidence bands.
+Larger constraint sets reuse five resource families with small
 perturbations. The results concern this synthetic family and the specified
 generic projection implementation.
 

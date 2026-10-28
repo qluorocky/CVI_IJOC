@@ -112,6 +112,17 @@ bands. Time axes are linear. The weak-gap axis includes zero using a linear
 region below `1e-4` and a logarithmic region above it. The initial point is
 displayed at time zero; subsequent times retain initialization costs.
 
+The additional two-panel summaries use the same checkpoint convention at
+`(n,m)=(1000,1)` and `(50,100)`, with logarithmic time from `1e-4` to three
+seconds. Their shaded bands are pointwise 95% percentile-bootstrap confidence
+intervals for the median, using 2000 resamples of whole seed trajectories
+with fixed random seed `20261028`. They are not interquartile ranges or
+simultaneous confidence bands. The gap summary retains a linear region below
+`1e-4` to include actual zero estimates. The combined-error summary uses
+logarithmic axes and aggregates each seed's saved `residual`, so infeasible
+points with zero gap are not shown as jointly accurate. Neither summary
+smooths rebounds, interpolates between checkpoints, or changes the raw results.
+
 ## Checkpoint CSV columns
 
 Each row describes one averaged iterate. Published CSVs contain no decision
