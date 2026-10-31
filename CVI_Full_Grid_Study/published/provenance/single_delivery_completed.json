@@ -1,0 +1,19 @@
+{
+  "state": "completed_ready_for_user",
+  "completed_utc": "2026-10-30T14:46:58.777535+00:00",
+  "folder": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Single_Constraint_LaTeX",
+  "archive": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Single_Constraint_LaTeX.zip",
+  "archive_sha256": "add1b00deff5511d296ed18b67863dcf2d2c7f3443bf3dbb41e2cde8370f81d7",
+  "paper_pdf": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Single_Constraint_LaTeX/main.pdf",
+  "paper_pdf_sha256": "e3a3003ee609502198fa99f50b9396bfd41513b90032c43d825be1ff2ef992a8",
+  "main_tex": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Single_Constraint_LaTeX/main.tex",
+  "instances": 60,
+  "method_runs": 300,
+  "all_five_method_curves_in_six_panels": true,
+  "audits_passed": true,
+  "visual_review_passed": true,
+  "proof_sources_unchanged": true,
+  "mc_insertion_file": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Single_Constraint_LaTeX/sec_multi_constraint_results_pending.tex",
+  "revised_multi_status": "running separately; n100,m10,50,100,200,500; no delivered single manuscript overwrite",
+  "monitor_remains_active_for_mc": true
+}

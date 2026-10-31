@@ -1,0 +1,115 @@
+{
+  "study_version": "single_constraint_release_v1",
+  "validation_fixture": false,
+  "purpose": "new_measured_single_constraint_delivery",
+  "settings": [
+    {
+      "study": "single",
+      "n": 10,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 50,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 100,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 200,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 500,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 1000,
+      "m": 1
+    }
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "methods": [
+    "proposed",
+    "oe_true",
+    "oe_low",
+    "oe_high",
+    "golden_ratio"
+  ],
+  "seconds": 1000.0,
+  "diagnostic_seconds": 300.0,
+  "workers": 7,
+  "source_hashes": {
+    "algorithms.py": "7636e881fc8eb308ace9ab1a73ac5731927ae43c8ddcd8e512b89429012b6a0e",
+    "batch.py": "418671ec160a6890b5f47f96d072692fc6682f18f0054f7a26dd1712a707331e",
+    "pack.py": "de231d34d8e8a642c775cd3b8c6b7710d21fe71f1450f710dbda5ae752f8f32a",
+    "projections.py": "a17fb6ce6c60060384bf0b473bccbf35820fd0e247b67c1b696fdf338cfeb099",
+    "report.py": "da0410e738537c4e65647f003d1a7900740569946d7e94ea2c10ccc6ee17bf22",
+    "study.py": "c679c03539ba103b72f286afff035267458ea5a13988003ff164693982bfcf30",
+    "test_checks.py": "6b8cac6b93cd66811357cad9b731748a4a4d2bb4d72100ff929b6a0ad7e91bbb"
+  },
+  "prior_runs_reused": true,
+  "execution_policy": {
+    "workers": 7,
+    "affinity": "os_managed",
+    "logical_cpus": 10,
+    "hardware": "Apple M4,10cores,16GiB",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "numerical_threads": 1,
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "memory_budget_gib": 8.0,
+    "min_free_disk_gib": 12.0,
+    "model_reserve_bytes_per_coefficient": 320,
+    "max_simultaneous_m_ge500": 1,
+    "heavy_companion_max_m": 0,
+    "max_simultaneous_m200": 2,
+    "admission": "First pending admissible case; factor storage plus profiled conic/model/module allowance; heavy cases before light companions"
+  },
+  "projection_policy": {
+    "dense_coefficient_cap": 5000000,
+    "conic_tolerance": 1e-08,
+    "feasibility_tolerance": 1e-07,
+    "slsqp_ftol": 1e-10,
+    "fallback": "full-constraint SLSQP after nonoptimal/error/resource-guard conic result",
+    "gap_seconds": 300.0,
+    "shared_absolute_gap_deadline": true
+  },
+  "release_scope": "single_only",
+  "inherited_single_provenance": {
+    "source_results": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results",
+    "source_plan_sha256": "cc5b97fd7b82de5b98c3382732fd511a0e316e351a4fbf0c75d41156c7e78afd",
+    "earlier_small_study_reused": false,
+    "historical_table_values_reused": false
+  },
+  "plan_amendment": {
+    "reason": "User requested immediate single-constraint LaTeX; multi-constraint table will be inserted later.",
+    "source_plan_sha256": "cc5b97fd7b82de5b98c3382732fd511a0e316e351a4fbf0c75d41156c7e78afd"
+  },
+  "orchestrator_hashes": {
+    "prepare_single_release.py": "748e8a2d6ccbe67ee66c5a1301f8e6eda7b2506b520637cc7ace345c985b77fc"
+  }
+}

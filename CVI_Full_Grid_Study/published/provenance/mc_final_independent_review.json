@@ -1,0 +1,639 @@
+{
+  "status": "passed",
+  "completed_utc": "2026-10-31T01:07:22.319877+00:00",
+  "scope": "MC-only final release at n100,m10,50,100,200,500",
+  "instances": 50,
+  "method_runs": 250,
+  "counts": {
+    "certificate_stop": 10,
+    "checkpoints": 6327,
+    "time_limit": 240
+  },
+  "gap_status_counts": {
+    "optimal": 6327
+  },
+  "invalid_MC_diagnostics": 0,
+  "source_and_orchestrator_hashes_match": true,
+  "audit_receipts": {
+    "structural/structural_audit.json": {
+      "status": "structural_pass",
+      "evidence_files": 1821,
+      "stale_files": [],
+      "independent_gap_solves": 0
+    },
+    "table_statistics_audit.json": {
+      "status": "passed",
+      "evidence_files": 1826,
+      "stale_files": [],
+      "independent_gap_solves": null
+    }
+  },
+  "audit_receipt_sha256": {
+    "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_n100/verified/report/structural/structural_audit.json": "e76b57435defb27bb91b129f27013c10421a94eff7779277d5b9943ed72c4a69",
+    "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_n100/verified/report/table_statistics_audit.json": "ed1136dff82c75d40574d8a3b71b5d4387f1f2f5b5694e0eae503e9bd3f50b19"
+  },
+  "issues": [],
+  "metrics": [
+    {
+      "m": 10,
+      "method": "proposed",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 0.5815532999928109
+        },
+        "0.001": {
+          "count": 10,
+          "conditional_mean": 6.19252817920642
+        },
+        "0.0001": {
+          "count": 10,
+          "conditional_mean": 57.410118637495906
+        },
+        "1e-05": {
+          "count": 10,
+          "conditional_mean": 526.5511644290876
+        }
+      },
+      "final_V_max": 9.998952641194008e-06
+    },
+    {
+      "m": 10,
+      "method": "oe_true",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 197.89630881249906
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 10,
+      "method": "oe_low",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 10,
+      "method": "oe_high",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 10,
+      "method": "golden_ratio",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 365.36173963340696
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 50,
+      "method": "proposed",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 2.0595689123962075
+        },
+        "0.001": {
+          "count": 10,
+          "conditional_mean": 22.53359351659892
+        },
+        "0.0001": {
+          "count": 10,
+          "conditional_mean": 215.51338328319835
+        },
+        "1e-05": {
+          "count": 2,
+          "conditional_mean": 999.4778526250157
+        }
+      },
+      "final_V_max": 2.9292534054214545e-05
+    },
+    {
+      "m": 50,
+      "method": "oe_true",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 573.4321992498008
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 50,
+      "method": "oe_low",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 50,
+      "method": "oe_high",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 50,
+      "method": "golden_ratio",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 8,
+          "conditional_mean": 885.6990582708895
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 100,
+      "method": "proposed",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 2.756962837500032
+        },
+        "0.001": {
+          "count": 10,
+          "conditional_mean": 26.193654154101388
+        },
+        "0.0001": {
+          "count": 10,
+          "conditional_mean": 280.32150749150316
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 2.8672070463300745e-05
+    },
+    {
+      "m": 100,
+      "method": "oe_true",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 825.5404203248909
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 100,
+      "method": "oe_low",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 100,
+      "method": "oe_high",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 100,
+      "method": "golden_ratio",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 1,
+          "conditional_mean": 999.8630930419895
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 200,
+      "method": "proposed",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 4.747103904007235
+        },
+        "0.001": {
+          "count": 10,
+          "conditional_mean": 48.171965229103805
+        },
+        "0.0001": {
+          "count": 10,
+          "conditional_mean": 476.08182913749476
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 5.212801742801206e-05
+    },
+    {
+      "m": 200,
+      "method": "oe_true",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 9,
+          "conditional_mean": 811.8814231206844
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 200,
+      "method": "oe_low",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 200,
+      "method": "oe_high",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 200,
+      "method": "golden_ratio",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 1,
+          "conditional_mean": 882.3250121659948
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 500,
+      "method": "proposed",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 10,
+          "conditional_mean": 7.737299466691911
+        },
+        "0.001": {
+          "count": 10,
+          "conditional_mean": 67.49990285839885
+        },
+        "0.0001": {
+          "count": 10,
+          "conditional_mean": 554.8088855709008
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 6.578600979793336e-05
+    },
+    {
+      "m": 500,
+      "method": "oe_true",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 2,
+          "conditional_mean": 841.8992586460372
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 500,
+      "method": "oe_low",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 500,
+      "method": "oe_high",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    },
+    {
+      "m": 500,
+      "method": "golden_ratio",
+      "runs": 10,
+      "attainment": {
+        "0.01": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "0.0001": {
+          "count": 0,
+          "conditional_mean": null
+        },
+        "1e-05": {
+          "count": 0,
+          "conditional_mean": null
+        }
+      },
+      "final_V_max": 0.0
+    }
+  ],
+  "limitations": "Structural auditor performed zero independent gap solves. This read-only review checks saved diagnostics and recomputes measured attainment, without re-solving numerical gaps, rerunning methods or changing reports. Eight inherited single diagnostic failures remain in combined report and do not enter MC metrics."
+}

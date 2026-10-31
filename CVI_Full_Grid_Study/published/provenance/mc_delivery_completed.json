@@ -1,0 +1,34 @@
+{
+  "completed_utc": "2026-10-31T01:10:09.545556+00:00",
+  "state": "mc_table_and_brief_discussion_ready_for_delivery",
+  "scope": {
+    "n": 100,
+    "m": [
+      10,
+      50,
+      100,
+      200,
+      500
+    ],
+    "seeds_per_setting": 10,
+    "instances": 50,
+    "method_runs": 250,
+    "diagnostic_checkpoints": 6327,
+    "unresolved_MC_diagnostics": 0,
+    "MC_method_failures": 0
+  },
+  "table": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/JoC_submission/results/mc_table.tex",
+  "table_sha256": "37ba74dc02ff3d4afbdd49f9017bb5b1906028822edee196af8da9bae2f57a08",
+  "preview": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/mc_table_preview.pdf",
+  "brief_discussion": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/mc_discussion_short.tex",
+  "bundle": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle.zip",
+  "bundle_sha256": "648158140c03d7d2ef5fb66c6f48351dd17f1aeb40dd288ee77eb65a555588cd",
+  "review_file": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/notes/mc_insertion_review.json",
+  "review_sha256": "5b1719dc08fe85081254687f291cafc9effeb4a61d48f96082578c44f58c942c",
+  "independent_review": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/notes/mc_final_independent_review.json",
+  "archive_checksums_verified": 909,
+  "article_master_rewritten": false,
+  "delivered_single_paper_touched": false,
+  "priority_figure_already_delivered": true,
+  "followup": "Delete after completed delivery"
+}

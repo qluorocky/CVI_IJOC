@@ -1,0 +1,177 @@
+{
+  "study_version": "full_grid_corrected_mc_n100_v1",
+  "validation_fixture": false,
+  "purpose": "full_grid_measured",
+  "settings": [
+    {
+      "study": "single",
+      "n": 10,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 50,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 100,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 200,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 500,
+      "m": 1
+    },
+    {
+      "study": "single",
+      "n": 1000,
+      "m": 1
+    },
+    {
+      "study": "multi",
+      "n": 100,
+      "m": 10
+    },
+    {
+      "study": "multi",
+      "n": 100,
+      "m": 50
+    },
+    {
+      "study": "multi",
+      "n": 100,
+      "m": 100
+    },
+    {
+      "study": "multi",
+      "n": 100,
+      "m": 200
+    },
+    {
+      "study": "multi",
+      "n": 100,
+      "m": 500
+    }
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "methods": [
+    "proposed",
+    "oe_true",
+    "oe_low",
+    "oe_high",
+    "golden_ratio"
+  ],
+  "seconds": 1000.0,
+  "diagnostic_seconds": 300.0,
+  "workers": 7,
+  "planned_instances": 110,
+  "planned_methods": 550,
+  "source_hashes": {
+    "algorithms.py": "7636e881fc8eb308ace9ab1a73ac5731927ae43c8ddcd8e512b89429012b6a0e",
+    "batch.py": "418671ec160a6890b5f47f96d072692fc6682f18f0054f7a26dd1712a707331e",
+    "pack.py": "de231d34d8e8a642c775cd3b8c6b7710d21fe71f1450f710dbda5ae752f8f32a",
+    "projections.py": "a17fb6ce6c60060384bf0b473bccbf35820fd0e247b67c1b696fdf338cfeb099",
+    "report.py": "da0410e738537c4e65647f003d1a7900740569946d7e94ea2c10ccc6ee17bf22",
+    "study.py": "c679c03539ba103b72f286afff035267458ea5a13988003ff164693982bfcf30",
+    "test_checks.py": "6b8cac6b93cd66811357cad9b731748a4a4d2bb4d72100ff929b6a0ad7e91bbb"
+  },
+  "prior_runs_reused": true,
+  "orchestrator_hashes": {
+    "batch_n100.py": "0612bcc58ef166abbb5c1483286431856094abaff703eff317640f64f9e673ee"
+  },
+  "plan_amendment": {
+    "original_multi_dimension": 1000,
+    "amended_multi_dimension": 100,
+    "single_grid_unchanged": true,
+    "constraint_counts": [
+      10,
+      50,
+      100,
+      200,
+      500
+    ],
+    "removed_constraint_counts": [
+      1000
+    ],
+    "reason": "User reduced only multi-constraint dimension from1000 to100; six constraint counts,tenseeds,fivemethods andsinglegrid retained.",
+    "transition_file": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/notes/grid_transition.json",
+    "transition_sha256": "8265d2586246f0b2cfdf38edb8f71eb1d6e33ab70ab3d00517f840c9f32648d2",
+    "scheduling_amendment": "Heavy classification uses >=1 GiB factor footprint, not constraint count; seven workers and 8 GiB modeled RAM retained"
+  },
+  "inherited_single_provenance": {
+    "source_results": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results",
+    "source_plan_sha256": "cc5b97fd7b82de5b98c3382732fd511a0e316e351a4fbf0c75d41156c7e78afd",
+    "eligible": "Only m=1 single cases from this NEW original full-grid study",
+    "excluded": "All original multi cases and all small/historical studies",
+    "inherited_workers": [
+      {
+        "case": "single_n200_m1_seed9",
+        "path": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results/working/single_n200_m1_seed9",
+        "pid": 75319,
+        "process_identity": "75319 65644 Fri Oct 30 07:59:40 2026     /Users/qiluo/Documents/ChatGPT/CVI/.venv/bin/python /Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/code/study.py --n 200 --m 1 --seed 9 --seconds 1000.0 --diagnostic-seconds 300.0 --out /Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results/working/single_n200_m1_seed9 --methods proposed,oe_true,oe_low,oe_high,golden_ratio"
+      },
+      {
+        "case": "single_n500_m1_seed9",
+        "path": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results/working/single_n500_m1_seed9",
+        "pid": 78557,
+        "process_identity": "78557 65644 Fri Oct 30 08:03:25 2026     /Users/qiluo/Documents/ChatGPT/CVI/.venv/bin/python /Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/code/study.py --n 500 --m 1 --seed 9 --seconds 1000.0 --diagnostic-seconds 300.0 --out /Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results/working/single_n500_m1_seed9 --methods proposed,oe_true,oe_low,oe_high,golden_ratio"
+      },
+      {
+        "case": "single_n1000_m1_seed9",
+        "path": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results/working/single_n1000_m1_seed9",
+        "pid": 82978,
+        "process_identity": "82978 65644 Fri Oct 30 08:08:22 2026     /Users/qiluo/Documents/ChatGPT/CVI/.venv/bin/python /Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/code/study.py --n 1000 --m 1 --seed 9 --seconds 1000.0 --diagnostic-seconds 300.0 --out /Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results/working/single_n1000_m1_seed9 --methods proposed,oe_true,oe_low,oe_high,golden_ratio"
+      }
+    ],
+    "adoption": "After worker exit, strict identity/checksum validation and per-case lineage"
+  },
+  "execution_policy": {
+    "workers": 7,
+    "affinity": "os_managed",
+    "logical_cpus": 10,
+    "hardware": "Apple M4,10cores,16GiB",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "numerical_threads": 1,
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "memory_budget_gib": 8.0,
+    "min_free_disk_gib": 12.0,
+    "model_reserve_bytes_per_coefficient": 320,
+    "heavy_factor_threshold_gib": 1.0,
+    "max_simultaneous_heavy_factor_cases": 1,
+    "inherited_workers_count_toward_slots_and_ram": true,
+    "admission": "First pending admissible case under factor+conic reserve; dimension-aware heavy footprint"
+  },
+  "projection_policy": {
+    "dense_coefficient_cap": 5000000,
+    "conic_tolerance": 1e-08,
+    "feasibility_tolerance": 1e-07,
+    "slsqp_ftol": 1e-10,
+    "fallback": "full-constraint SLSQP after nonoptimal/error/resource-guard conic result",
+    "gap_seconds": 300.0,
+    "shared_absolute_gap_deadline": true
+  }
+}

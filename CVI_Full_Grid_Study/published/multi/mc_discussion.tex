@@ -1,0 +1,12 @@
+The multi-constraint study fixes $n=100$ and uses
+$m\in\{10,50,100,200,500\}$, with ten paired random seeds per setting.
+In Table~\ref{tab:multi_constraint_comparative}, MC-PFAOS reaches the joint
+numerical-error threshold $10^{-4}$ in all 50 runs.
+It reaches $10^{-5}$ in all ten runs with $m=10$ and two runs with $m=50$;
+none with $m\ge100$ reaches this threshold within the 1000-second budget.
+In contrast, neither fixed OE with $\widehat M=M$ nor the Golden Ratio
+method reaches $10^{-3}$ in any run.
+For thresholds attained by both MC-PFAOS and a baseline, MC-PFAOS has the
+smaller conditional mean hitting time.
+These results support MC-PFAOS's empirical advantage under the joint
+VI-gap and feasibility criterion.

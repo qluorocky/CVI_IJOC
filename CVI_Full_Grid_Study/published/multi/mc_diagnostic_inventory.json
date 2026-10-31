@@ -1,0 +1,74 @@
+{
+  "scope": "new_mc_n100_insertion_only",
+  "instances": 50,
+  "method_runs": 250,
+  "n": 100,
+  "constraint_counts": [
+    10,
+    50,
+    100,
+    200,
+    500
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "methods": [
+    "proposed",
+    "oe_true",
+    "oe_low",
+    "oe_high",
+    "golden_ratio"
+  ],
+  "seconds_per_method": 1000,
+  "table_method_rows": 15,
+  "figure_panels": 5,
+  "figure_methods_per_panel": 5,
+  "checkpoints": 6327,
+  "diagnostic_status_counts": {
+    "optimal": 6327
+  },
+  "termination_counts": {
+    "certificate_stop": 10,
+    "time_limit": 240
+  },
+  "algorithm_failures": [],
+  "unresolved_joint_diagnostics": [],
+  "unavailable_aggregate_groups": [],
+  "mc_has_exceptions": false,
+  "status": "mc_complete",
+  "single_constraint_diagnostics_used_for_mc_metrics": false,
+  "execution_policy": {
+    "workers": 7,
+    "affinity": "os_managed",
+    "logical_cpus": 10,
+    "hardware": "Apple M4,10cores,16GiB",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "numerical_threads": 1,
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1"
+    },
+    "memory_budget_gib": 8.0,
+    "min_free_disk_gib": 12.0,
+    "model_reserve_bytes_per_coefficient": 320,
+    "heavy_factor_threshold_gib": 1.0,
+    "max_simultaneous_heavy_factor_cases": 1,
+    "inherited_workers_count_toward_slots_and_ram": true,
+    "admission": "First pending admissible case under factor+conic reserve; dimension-aware heavy footprint"
+  },
+  "independent_gap_solves_by_this_helper": 0
+}

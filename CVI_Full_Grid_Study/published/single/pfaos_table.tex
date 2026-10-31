@@ -1,0 +1,38 @@
+\begin{table*}[!htbp]
+\centering
+\caption{First observed valid joint numerical-error threshold times (seconds) and terminal constraint violation (m=1) over 10 attempted runs per configuration, with a 1000-second method cap.}
+\label{tab:single_constraint_comparative}
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{clccccc}
+\hline
+$n$ & Method & $\widehat E\le10^{-2}$ & $\widehat E\le10^{-3}$ & $\widehat E\le10^{-4}$ & $\widehat E\le10^{-5}$ & Final $V$ \\
+\hline
+10 & PFAOS & \shortstack{$10/10$\\0.019/0.050/0.081} & \shortstack{$10/10$\\0.051/0.475/1.03} & \shortstack{$10/10$\\0.152/6.37/12.52} & \shortstack{$10/10$\\0.834/66.92/134.57} & 0.00e+00/9.81e-07/3.75e-06 \\
+10 & OE ($\widehat M=M$) & \shortstack{$10/10$\\1.09/3.32/5.91} & \shortstack{$10/10$\\5.91/30.85/55.31} & \shortstack{$10/10$\\62.35/305.87/470.33} & \shortstack{$2/10$\\657.32/691.59/725.85} & 0.00e+00/0.00e+00/0.00e+00 \\
+10 & Golden Ratio & \shortstack{$10/10$\\2.30/6.46/9.95} & \shortstack{$10/10$\\17.38/63.72/104.91} & \shortstack{$10/10$\\140.24/629.26/1000.00} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+\hline
+50 & PFAOS & \shortstack{$10/10$\\0.039/0.167/0.345} & \shortstack{$10/10$\\0.658/1.68/3.03} & \shortstack{$10/10$\\5.88/16.80/33.00} & \shortstack{$10/10$\\65.57/167.61/273.30} & 9.65e-07/1.57e-06/3.13e-06 \\
+50 & OE ($\widehat M=M$) & \shortstack{$10/10$\\4.97/8.97/13.53} & \shortstack{$10/10$\\37.51/91.32/142.63} & \shortstack{$9/10$\\395.51/793.32/1000.00} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+50 & Golden Ratio & \shortstack{$10/10$\\7.86/15.51/22.94} & \shortstack{$10/10$\\79.12/153.55/241.89} & \shortstack{$3/10$\\834.07/902.79/1000.00} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+\hline
+100 & PFAOS & \shortstack{$10/10$\\0.134/0.243/0.373} & \shortstack{$10/10$\\1.53/2.44/3.27} & \shortstack{$10/10$\\17.43/24.35/34.03} & \shortstack{$10/10$\\148.46/237.12/299.46} & 1.54e-06/2.29e-06/4.20e-06 \\
+100 & OE ($\widehat M=M$) & \shortstack{$10/10$\\21.54/32.03/43.67} & \shortstack{$10/10$\\227.20/300.77/392.63} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+100 & Golden Ratio & \shortstack{$10/10$\\39.49/53.72/64.73} & \shortstack{$10/10$\\416.46/566.40/682.52} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+\hline
+200 & PFAOS & \shortstack{$10/10$\\0.315/0.475/0.607} & \shortstack{$10/10$\\3.07/5.03/7.28} & \shortstack{$10/10$\\34.54/52.09/73.01} & \shortstack{$10/10$\\323.91/505.63/661.39} & 1.98e-06/2.59e-06/3.34e-06 \\
+200 & OE ($\widehat M=M$) & \shortstack{$10/10$\\137.31/184.11/206.46} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+200 & Golden Ratio & \shortstack{$10/10$\\259.07/308.81/367.15} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+\hline
+500 & PFAOS & \shortstack{$10/10$\\0.556/0.784/1.22} & \shortstack{$10/10$\\5.88/8.08/10.79} & \shortstack{$10/10$\\65.13/81.18/122.52} & \shortstack{$10/10$\\554.19/804.24/998.11} & 3.16e-06/4.37e-06/7.05e-06 \\
+500 & OE ($\widehat M=M$) & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+500 & Golden Ratio & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+\hline
+1000 & PFAOS & \shortstack{$10/10$\\2.09/2.77/4.77} & \shortstack{$10/10$\\18.29/27.20/44.92} & \shortstack{$10/10$\\186.59/270.60/410.31} & \shortstack{$0/10$\\--} & 8.83e-06/1.33e-05/2.34e-05 \\
+1000 & OE ($\widehat M=M$) & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+1000 & Golden Ratio & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & \shortstack{$0/10$\\--} & 0.00e+00/0.00e+00/0.00e+00 \\
+\hline
+\end{tabular}}
+\smallskip
+\parbox{\textwidth}{\footnotesize\textit{Note:} Fix $m=1$. Each threshold cell shows observed valid successes $s/N$, then best/mean/worst times over those successful runs only. Where present, $u$ counts additional runs with no observed crossing and unresolved diagnostics; such runs are not classified as nonattainment. -- means no observed valid crossing before the recorded termination; algorithm failures are separately enumerated in the audit. Final $V$ gives best/mean/worst over all terminal reported outputs, or is marked unresolved if any terminal violation is unavailable. Times are raw seconds, coefficients are unscaled, and threshold times are saved-checkpoint observations without interpolation. The joint criterion requires numerical gap and violation at the same averaged point. The OE table row uses its fixed true-$M$ trajectory. The $0.1M$ and $10M$ trajectories are separate sensitivity runs shown in the figures; no best-trajectory selection is performed.}
+\end{table*}

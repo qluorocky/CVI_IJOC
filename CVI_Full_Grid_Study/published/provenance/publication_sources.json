@@ -1,0 +1,107 @@
+{
+  "CVI_Full_Grid_Study/published/single/pfaos_table.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/pfaos_table.tex",
+    "sha256": "dd4da843f877ee10ea9920bfc7b00a6fda1ded283a52b2786848d3573d180345",
+    "bytes": 5026
+  },
+  "CVI_Full_Grid_Study/published/single/pfaos_table_gap_only.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/pfaos_table_gap_only.tex",
+    "sha256": "26a86537f7c9f0d03cd8a47129a95fcd1f19127f75a6bd09eb784e3b110afeec",
+    "bytes": 5115
+  },
+  "CVI_Full_Grid_Study/published/single/pfaos_full_grid.pdf": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/pfaos_full_grid.pdf",
+    "sha256": "c5ad83e335602411eb87bce5304bea2f14b1109df246c8ffa15dd5cbfb8eefce",
+    "bytes": 127841
+  },
+  "CVI_Full_Grid_Study/published/single/pfaos_full_grid.png": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/pfaos_full_grid.png",
+    "sha256": "534e3f163f514cbc00f256b42df6d23dd56d26915e3606d51bc17733c02f30a2",
+    "bytes": 304834
+  },
+  "CVI_Full_Grid_Study/published/single/pfaos_full_grid_figure.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/pfaos_full_grid_figure.tex",
+    "sha256": "c84aaadaecdec6cb4b4d01a4a80f492caab5382cd3d791bac9d9fdc84a42e34a",
+    "bytes": 844
+  },
+  "CVI_Full_Grid_Study/published/single/checkpoints.csv": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/checkpoints.csv",
+    "sha256": "c7c98fe30917b2432d313761fa9b0a2312785d620f21992c5e550763b2d84aea",
+    "bytes": 3042378
+  },
+  "CVI_Full_Grid_Study/published/single/per_run_summary.csv": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/results_single/verified/report/per_run_summary.csv",
+    "sha256": "4d15900b8e13802926fd6f3571ee0dabd8940f2dcdec355324be24fdf34ba53d",
+    "bytes": 154275
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_table.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_table.tex",
+    "sha256": "37ba74dc02ff3d4afbdd49f9017bb5b1906028822edee196af8da9bae2f57a08",
+    "bytes": 4320
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_table_gap_only.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_table_gap_only.tex",
+    "sha256": "1e28803ef84ea72c943f09a7cb4d035052a9b1c75be7ed95a8621bec77963580",
+    "bytes": 4434
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_full_grid.pdf": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_full_grid.pdf",
+    "sha256": "59a468e553c00359bd0737a04130b5e759400fd833c4ded5f9240ad888029e5d",
+    "bytes": 111147
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_full_grid.png": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_full_grid.png",
+    "sha256": "0c60c6da21540926de7b89c07bf0da26721e3c7a95a0e4663f1aa3af566810a0",
+    "bytes": 273033
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_full_grid_figure.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_full_grid_figure.tex",
+    "sha256": "a4b8dcea332b0dd9b7b39d8b8fe0644f9b14a5c686464d17703fb37378f5ec1a",
+    "bytes": 889
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_discussion.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_discussion.tex",
+    "sha256": "469704275a851b08de4d3e4db5b790a5ff85cec5e9fad66159e689aa2920d898",
+    "bytes": 722
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_protocol.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_protocol.tex",
+    "sha256": "7a2b87fb86e821294362717d878541085d45cc8a7ff72b50c3c9cda60acbb2d2",
+    "bytes": 2411
+  },
+  "CVI_Full_Grid_Study/published/multi/mc_diagnostic_inventory.json": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/mc_diagnostic_inventory.json",
+    "sha256": "48b112e1859a1300b689e25cabdec4545a6cdf560a961f9554da1d06704be2f7",
+    "bytes": 1696
+  },
+  "CVI_Full_Grid_Study/published/multi/checkpoints.csv": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/checkpoints.csv",
+    "sha256": "f035601e14aeddb70a89470e1b23854456d98df07e0edd69403a5badc1a640ca",
+    "bytes": 2955889
+  },
+  "CVI_Full_Grid_Study/published/multi/per_run_summary.csv": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/MC_results/per_run_summary.csv",
+    "sha256": "2193e57de4de69e2b4c0de9b7fa63517d27339bcac15ed2c8c9cb84d04510150",
+    "bytes": 124855
+  },
+  "CVI_Full_Grid_Study/published/sensitivity/sensitivity_residual.pdf": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/figure/sensitivity_residual.pdf",
+    "sha256": "dc03d025cac461ae22d882d62a843d3fcc4d338c2357fa4b0bc79f6355eb408e",
+    "bytes": 142615
+  },
+  "CVI_Full_Grid_Study/published/sensitivity/sensitivity_residual.png": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/figure/sensitivity_residual.png",
+    "sha256": "a5f1a85f282d5d523c628343d37e171719564aaa65430c2b6833ea8792b94759",
+    "bytes": 307467
+  },
+  "CVI_Full_Grid_Study/published/sensitivity/sensitivity_residual_caption.tex": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/figure/sensitivity_residual_caption.tex",
+    "sha256": "16ea13993a365874eebed712612febdc85eb742d1be6aa9d840f623ae1e146b8",
+    "bytes": 1395
+  },
+  "CVI_Full_Grid_Study/published/sensitivity/sensitivity_plot_data.csv": {
+    "source": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/figure/sensitivity_plot_data.csv",
+    "sha256": "9aad0a22673fc05e2b7a28dd9db9a95558b71ff86a92cc8e6293729d6a1e9b9d",
+    "bytes": 579432
+  }
+}

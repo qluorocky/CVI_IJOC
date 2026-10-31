@@ -1,0 +1,49 @@
+{
+  "decision": "approved_for_mc_insertion_bundle",
+  "reviewed_utc": "2026-10-31T01:09:53.887873+00:00",
+  "mc_review_pdf_sha256": "2c0d546c6e94f0e2530cb292baa94cdf35c16899abbbb70e5efc476b90e737e9",
+  "mc_table_figure_pdf_sha256": "0b409b3318321bf43d907372cee61d3b35501f41cc0791856af3b3e8e8f7d805",
+  "mc_table_preview_pdf_sha256": "23ba0e79aa97abe1645c9d3b948d17e71b7001aa6d3e7ce445c30a1aed48f8de",
+  "references_resolved": true,
+  "checks": {
+    "coverage": true,
+    "statistics": true,
+    "structural": true,
+    "visual_table": true,
+    "visual_figure": true,
+    "qualifications": true
+  },
+  "acknowledges_mc_exceptions": false,
+  "mc_exceptions": 0,
+  "instances": 50,
+  "method_runs": 250,
+  "valid_diagnostic_checkpoints": 6327,
+  "independent_review_file": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/notes/mc_final_independent_review.json",
+  "independent_review_sha256": "690dcf285325127b9659631e5e2cd01c65acfa30dc87eaf2b2abb823d4332ca6",
+  "visual_review": {
+    "table_preview_pages": 1,
+    "primary_rows": 15,
+    "all_five_m_values": true,
+    "all_columns_readable": true,
+    "table_clipping": false,
+    "figure_panels": 5,
+    "figure_curves": 25,
+    "figure_legend_readable": true,
+    "review_pages": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "last_first_page_rechecked_after_minor_wrapping_fix": true,
+    "unresolved_references": false,
+    "overfull_boxes": 0
+  },
+  "limits": "Numerical gap evaluations remain numerical; factorwise structural auditor performs zero independent gap solves. Eight original single diagnostics remain preserved outside MC metrics.",
+  "brief_discussion_file": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_MC_Insertion_Bundle/mc_discussion_short.tex",
+  "brief_discussion_sha256": "2c8f01482f58b627eadcb74227afb9059b19aa80eb327184d24b8dc7779ad300",
+  "traditional_table_alias_sha256": "37ba74dc02ff3d4afbdd49f9017bb5b1906028822edee196af8da9bae2f57a08",
+  "source_table_sha256": "37ba74dc02ff3d4afbdd49f9017bb5b1906028822edee196af8da9bae2f57a08",
+  "article_master_rewritten": false,
+  "priority_figure_unchanged": true
+}

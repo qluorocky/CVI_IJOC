@@ -1,0 +1,31 @@
+{
+  "prepared_utc": "2026-10-31T02:08:28.464368+00:00",
+  "repository": "qluorocky/CVI_IJOC",
+  "base_commit": "0340dc117ed4e56cbe36d07045d1d63bc79dbced",
+  "scope": "Corrected experiment/reporting code and selected measured outputs; no article master or proofs",
+  "experimental_scope": {
+    "single_instances": 60,
+    "multi_instances": 50,
+    "total_method_runs": 550
+  },
+  "frozen_numerical_source_sha256": {
+    "algorithms.py": "7636e881fc8eb308ace9ab1a73ac5731927ae43c8ddcd8e512b89429012b6a0e",
+    "batch.py": "418671ec160a6890b5f47f96d072692fc6682f18f0054f7a26dd1712a707331e",
+    "pack.py": "de231d34d8e8a642c775cd3b8c6b7710d21fe71f1450f710dbda5ae752f8f32a",
+    "projections.py": "a17fb6ce6c60060384bf0b473bccbf35820fd0e247b67c1b696fdf338cfeb099",
+    "report.py": "da0410e738537c4e65647f003d1a7900740569946d7e94ea2c10ccc6ee17bf22",
+    "study.py": "c679c03539ba103b72f286afff035267458ea5a13988003ff164693982bfcf30",
+    "test_checks.py": "6b8cac6b93cd66811357cad9b731748a4a4d2bb4d72100ff929b6a0ad7e91bbb"
+  },
+  "validation": {
+    "corrected_source_hashes": "passed",
+    "all_250_MC_summary_rows_and_measured_inventory": "passed",
+    "reporting_regressions": "passed",
+    "numerical_and_resume_guards": "passed",
+    "tests_use_only_small_temporary_instances": true,
+    "full_grid_rerun": false
+  },
+  "raw_inventory_limit": "This checkout omits original full point archives, working factors and diagnostic-recovery snapshots; see PUBLISHED_GUIDE.md",
+  "original_measurements_changed": false,
+  "article_master_rewritten": false
+}

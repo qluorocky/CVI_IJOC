@@ -1,0 +1,51 @@
+{
+  "decision": "approved_for_portable_release",
+  "reviewed_utc": "2026-10-30T14:45:36.205649+00:00",
+  "package_main_pdf_sha256": "e3a3003ee609502198fa99f50b9396bfd41513b90032c43d825be1ff2ef992a8",
+  "package_numerical_review_pdf_sha256": "c96429d9431e0508c564765006499aaa677f81cc28dc98cffccf3dea26f96c3e",
+  "checks": {
+    "references": true,
+    "citations": true,
+    "visual_tables": true,
+    "visual_figure": true,
+    "proofs_unchanged": true
+  },
+  "references_resolved": true,
+  "citations_resolved": true,
+  "visual_inspection_passed": true,
+  "source_visual_pages": [
+    26,
+    27,
+    28,
+    36
+  ],
+  "portable_verification": "36pages; all extracted page text and page count equal reviewed original; sources/assets/measurements match except documented wrapper paths. Both portable TeX entries compile.",
+  "scope": {
+    "instances": 60,
+    "method_runs": 300,
+    "dimensions": [
+      10,
+      50,
+      100,
+      200,
+      500,
+      1000
+    ],
+    "m": 1,
+    "methods": [
+      "proposed",
+      "oe_true",
+      "oe_low",
+      "oe_high",
+      "golden_ratio"
+    ]
+  },
+  "all_30_figure_groups_present": true,
+  "table_rows": 18,
+  "unresolved_gap_diagnostics": 0,
+  "selected_independent_gap_refinements": 8,
+  "limits": "Eight posterior numerical primal-dual brackets, not formal interval certificates; other gaps not independently re-solved. Original/v1 failures and three rootnon-success flags preserved.",
+  "data_audit": "passed",
+  "structural_audit": "structural_pass",
+  "multi_constraint_status": "separate n100,m10,50,100,200,500 pipeline running; paper has explicit author-insertion placeholder"
+}

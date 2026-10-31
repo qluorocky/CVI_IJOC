@@ -2,6 +2,42 @@
 
 [![Reproducibility checks](https://github.com/qluorocky/CVI_IJOC/actions/workflows/tests.yml/badge.svg)](https://github.com/qluorocky/CVI_IJOC/actions/workflows/tests.yml)
 
+## Current corrected study
+
+The completed 1,000-second, five-method study is in
+[`CVI_Full_Grid_Study/`](CVI_Full_Grid_Study/PUBLISHED_GUIDE.md).
+It contains **110 paired instances and 550 method runs**:
+
+- Single constraint: `m=1`, `n=10,50,100,200,500,1000`; ten seeds.
+- Multiple constraints: `n=100`, `m=10,50,100,200,500`; ten seeds.
+- PFAOS/MC-PFAOS, Golden Ratio, and fixed OE with `M`, `0.1M`, and `10M`.
+- Primary offline numerical-gap budgets of 300 seconds, recorded separately.
+
+The current measured assets are
+[single-constraint results](CVI_Full_Grid_Study/published/single/),
+[multi-constraint results](CVI_Full_Grid_Study/published/multi/), and the requested
+[two-instance sensitivity figure](CVI_Full_Grid_Study/published/sensitivity/sensitivity_residual.pdf)
+(PFAOS `n=1000,m=1`; MC-PFAOS `n=100,m=100`).
+The [MC table](JoC_submission/results/mc_table.tex) retains its article input path,
+and the [brief discussion](JoC_submission/results/mc_discussion_short.tex)
+can be inserted without rewriting the article.
+
+The corrected worker source is preserved byte-for-byte with recorded SHA256 hashes.
+The corrected algorithms use the unscaled dense instance family described in the
+[current guide](CVI_Full_Grid_Study/PUBLISHED_GUIDE.md); they are separate from the
+normalized short-run workflow below. Numerical gaps are numerical evaluations,
+not formal finite-precision certificates. Structural audits do not independently
+solve every gap. The refined single release and MC release retain their distinct
+diagnostic provenance.
+
+Root-level scripts, `RESULTS.md`, `REPRODUCIBILITY.md`, `AUDIT.md`, and
+`results/` below remain the **legacy three-second study**. Its reported values
+are not the corrected full-grid results. The original manuscript is not included
+or rewritten by this code update.
+
+## Retained legacy three-second workflow
+
+
 Python implementations and numerical experiments for **PFAOS** and
 **MC-PFAOS**, accompanying *Parameter-Free First-Order Method for Constrained
 Variational Inequalities*. The experiments compare the proposed methods with
@@ -153,3 +189,4 @@ generic projection implementation.
 ![PFAOS weak VI gaps](results/figures/pfaos_residual.png)
 
 ![MC-PFAOS weak VI gap](results/figures/mc_residual.png)
+

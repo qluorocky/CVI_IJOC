@@ -1,0 +1,51 @@
+{
+  "completed_utc": "2026-10-30T17:52:48.643873+00:00",
+  "status": "delivered_after_visual_and_independent_statistics_review",
+  "pdf": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/figure/sensitivity_residual.pdf",
+  "png": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/figure/sensitivity_residual.png",
+  "settings": [
+    {
+      "n": 1000,
+      "m": 1
+    },
+    {
+      "n": 100,
+      "m": 100
+    }
+  ],
+  "seeds_per_panel": 10,
+  "methods_per_panel": 5,
+  "pdf_media_box_pt": [
+    0,
+    0,
+    792,
+    345.6
+  ],
+  "visual_review": {
+    "reference": "/Users/qiluo/Downloads/sensitivity_residual.pdf",
+    "grayscale": true,
+    "two_panel_layout": true,
+    "STIX_fonts": true,
+    "axes_legend_markers_and_target_match": true,
+    "confirmed_MC_title": "n=100,m=100",
+    "clipping_or_overlap": false
+  },
+  "independent_review": "/Users/qiluo/Documents/ChatGPT/CVI/CVI_Full_Grid_Study/priority_sensitivity/independent_review.json",
+  "artifact_sha256": {
+    "sensitivity_plot_provenance.json": "e43fe2ac7466c0805300ab5fa5609a76413d171f26cfbfa39de951202ea8f6f6",
+    "sensitivity_residual_caption.tex": "16ea13993a365874eebed712612febdc85eb742d1be6aa9d840f623ae1e146b8",
+    "sensitivity_residual.pdf": "dc03d025cac461ae22d882d62a843d3fcc4d338c2357fa4b0bc79f6355eb408e",
+    "sensitivity_residual.png": "a5f1a85f282d5d523c628343d37e171719564aaa65430c2b6833ea8792b94759",
+    "sensitivity_plot_data.csv": "9aad0a22673fc05e2b7a28dd9db9a95558b71ff86a92cc8e6293729d6a1e9b9d"
+  },
+  "remaining_MC_queue": {
+    "state": "running",
+    "controller_pid": 32192,
+    "instances_finished": 77,
+    "active_count": 7,
+    "expected_workers": 7,
+    "method_errors": [],
+    "failed": []
+  },
+  "monitor": "Restored same heartbeat to hourly; continue remaining MC fragments without overwriting delivered single manuscript"
+}

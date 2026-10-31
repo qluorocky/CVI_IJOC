@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "dense_generator_monotonicity_strict_feasibility_and_no_scaling",
+    "stable_quadratic_remainder_matches_exact_identity",
+    "tiny_step_curvature_test_has_no_additive_floor",
+    "PFAOS_QP_and_certificate_multiplier_match_independent_conic_solves",
+    "paper_search_rollback_balance_certificate_and_curvature_n10_m1",
+    "paper_search_rollback_balance_certificate_and_curvature_n12_m4",
+    "paper_search_rollback_balance_certificate_and_curvature_n10_m3",
+    "constraint_generation_matches_full_projection_and_checks_every_constraint",
+    "Golden_Ratio_first_step_theta0_equivalence",
+    "Golden_Ratio_stepsize_weighted_ergodic_average_definition",
+    "actual_baseline_code_uses_original_GR_first_step_and_correct_output_indices",
+    "actual_fixed_OE_keeps_its_estimate_and_averages_completed_projections"
+  ],
+  "count": 12,
+  "all_passed": true
+}

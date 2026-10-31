@@ -1,7 +1,2 @@
-numpy==2.3.5
-scipy==1.17.0
-cvxpy==1.9.3
-clarabel==0.11.1
-matplotlib==3.10.8
-pandas==2.2.3
-pytest==9.1.1
+undefinedthreadpoolctl==3.6.0
+
